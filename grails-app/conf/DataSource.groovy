@@ -34,7 +34,9 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://localhost/jaf"
+            url = "jdbc:mysql://localhost/lpc"
+            username = "root"
+            password = "abcd"
         }
     }
     test {
