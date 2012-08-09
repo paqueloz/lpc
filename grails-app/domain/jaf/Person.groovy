@@ -56,6 +56,10 @@ class Person {
         mother(nullable: true)
     }
 
+    static searchable = {
+        only = ['firstname','lastname','preferences']
+    }
+
 
     def String toString() {
         return firstName + " " + lastName

@@ -27,6 +27,10 @@ class Camp {
 
     static constraints = {
     }
+    
+    static searchable = {
+        except = 'years'
+    }
 
     def String toString() {
         return location

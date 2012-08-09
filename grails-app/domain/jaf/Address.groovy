@@ -35,6 +35,10 @@ class Address {
     static constraints = {
     }
 
+    static searchable = {
+        except = ['parents','dateCreated','lastUpdated']
+    }
+    
     def String toString() {
         return street1 + " " + street2 + " " + zipCode
     }
