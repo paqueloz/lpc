@@ -22,7 +22,11 @@ import jaf.SecRole
 import jaf.SecUser
 import jaf.SecUserSecRole
 
+// import org.codehaus.groovy.grails.commons.ConfigurationHolder
+
 class BootStrap {
+    
+    def grailsApplication
 
     def init = { servletContext ->
 
@@ -32,7 +36,7 @@ class BootStrap {
 
         def adminUser = SecUser.findByUsername('admin') ?: new SecUser(
                 username: 'admin',
-                password: 'admin',
+                password: grailsApplication.config.sec.adm.pass,
                 enabled: true).save(failOnError: true)
 
         if (!adminUser.authorities.contains(adminRole)) {
