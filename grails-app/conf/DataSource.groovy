@@ -48,9 +48,9 @@ environments {
     production {
         dataSource {
             dbCreate = "create-drop"
-            url = "jdbc:mysql://localhost/lpc"
-            username = "root"
-            password = "abcd"
+            url = ""
+            username = ""
+            password = ""
             pooled = true
             properties {
                maxActive = -1
