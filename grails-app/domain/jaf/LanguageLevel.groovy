@@ -22,15 +22,15 @@ package jaf
 
 class LanguageLevel {
 
+    static belongsTo = [person:Person]
     Locale language
     Level level
 
     static constraints = {
-        language(nullable: false)
     }
 
     def String toString() {
-        return language.getDisplayName() + "(" + level + ")"
+        return language.getDisplayName() + " (" + level + ")"
     }
 
 }
@@ -44,5 +44,5 @@ enum Language {
 
 enum Level {
 
-    BASIC, GOOD, FLUENT
+    BASIC, GOOD, FLUENT, MOTHERTONGUE, UNdefined
 }

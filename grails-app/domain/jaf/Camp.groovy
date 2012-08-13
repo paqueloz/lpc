@@ -23,10 +23,18 @@ package jaf
 class Camp {
 
     String location
+    Nationalities nationality
+    //Address addressHouse
+    Contact contactHouse
+    Person personHouse
     static hasMany = [years : CampYear]
 
     static constraints = {
-    }
+        String location
+        nationality(nullable: true)
+        //AddressHouse(nullable: true)    No signature of method: jaf.Camp.AddressHouse() is applicable for argument types: (java.util.LinkedHashMap) values: [[nullable:true]]
+        contactHouse(nullable: true)
+        personHouse(nullable: true)}
     
     static searchable = {
         except = 'years'

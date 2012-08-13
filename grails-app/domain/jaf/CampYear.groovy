@@ -30,6 +30,6 @@ class CampYear {
     }
 
     def String toString() {
-        return year
+        return "$camp ($year)"
     }
 }

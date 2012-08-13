@@ -26,58 +26,54 @@ class Person {
     String lastName
 
     Date birthDay
-    Nationality nationality //TODO convert it into an enumeration
-    boolean vip
-    String sgroup
+    Date deathDay
+
+    //Nationality nationality //TODO convert it into an enumeration
 
     String preferences
     Gender gender
 
     boolean rejected
-    Status status
+    LastStatus status
 
     boolean newClient //TODO ASK jacques for the purpose
 
     Date dateCreated
     Date lastUpdated
 
-    Person father
-    Person mother
+    //Person father
+    //Person mother
 
-    static hasMany = [contacts: Contact, attendances: Attendance,languages: LanguageLevel]
+    static hasMany = [contacts: Contact, attendances: Attendance,languages: LanguageLevel, addresses: Address, nationality: Nationalities]
 
 
     static constraints = {
         firstName(blank: false)
         lastName(blank: false)
-        nationality()
+        // nationality()
         birthDay()
-        father(nullable: true)
-        mother(nullable: true)
+        deathDay(nullable: true)
+        //father(nullable: true)
+        //mother(nullable: true)
+        preferences(nullable: true)
     }
 
     static searchable = {
-        only = ['firstname','lastname','preferences']
+        only = ['firstName','lastName','preferences']
     }
-
 
     def String toString() {
         return firstName + " " + lastName
     }
 }
 
-enum Nationality {
-     AMERICA,FRENCH
-
-    //TODO fill the list of nationalities
-}
 
 enum Gender {
-    MALE, FEMALE
+    MALE, FEMALE, UNdefined
 }
 
-enum Status {
+enum LastStatus {
 
-    CD, CO, CA, DIT, I, D, PARENT
+    Friend, CoDirector, COuncellor, CAmper, DITraining, Invited, Director,  UNdefined
 
 }

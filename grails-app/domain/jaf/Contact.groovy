@@ -24,13 +24,15 @@ import org.apache.commons.validator.EmailValidator
 
 class Contact {
 
-    static belongsTo = [Person]
+    static belongsTo = [person:Person]
 
+    Date dateCreated
+    Date lastUpdated
 
     ContactType type
     ContactMode mode
     String value
-    boolean enabled
+    boolean active
 
     static constraints = {
         value(blank: false, validator: {val,obj ->
@@ -38,10 +40,15 @@ class Contact {
             true
         })
     }
+
+    String toString() {
+        return "[" + mode + "]" + value +  "(" + type + ")"
+    }
+
 }
 
 enum ContactType {
-    PHONE, FAX, EMAIL
+    PHONE, FAX, EMAIL, MOBILE
 }
 
 enum ContactMode {

@@ -22,24 +22,32 @@ package jaf
 
 class Address {
 
+    static belongsTo = [person:Person]
+
     String street1
     String street2
     String zipCode
     String city
     String country
-    boolean parents
+    boolean active
 
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
+        street1()
+        street2(nullable: true)
+        zipCode(nullable: true)
+        city(nullable: true)
+        country(nullable: true)
+        active()
     }
 
     static searchable = {
-        except = ['parents','dateCreated','lastUpdated']
+        except = ['dateCreated','lastUpdated']
     }
     
     def String toString() {
-        return street1 + " " + street2 + " " + zipCode
+        return street1 + " " + street2 ?: "" + " " + zipCode
     }
 }

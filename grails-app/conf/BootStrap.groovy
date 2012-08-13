@@ -18,6 +18,8 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import grails.util.Environment
+
 import jaf.SecRole
 import jaf.SecUser
 import jaf.SecUserSecRole
@@ -30,13 +32,15 @@ class BootStrap {
 
     def init = { servletContext ->
 
+        def currentEnv = Environment.current
+        
         def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
         def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
 
 
         def adminUser = SecUser.findByUsername('admin') ?: new SecUser(
                 username: 'admin',
-                password: grailsApplication.config.sec.adm.pass,
+                password: currentEnv == Environment.PRODUCTION ? grailsApplication.config.sec.adm.pass : "abcd",
                 enabled: true).save(failOnError: true)
 
         if (!adminUser.authorities.contains(adminRole)) {

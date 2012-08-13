@@ -23,8 +23,8 @@ package jaf
 class Attendance {
 
     static belongsTo = [camp: CampYear, person: Person]
-    Status status
-    CampType type
+    StatusAttendance status
+    //CampType type //TODO ASK for the purpose
 
     static constraints = {
     }
@@ -34,4 +34,10 @@ class Attendance {
     }
 }
 
-enum CampType {}
+//enum CampType {}
+
+enum StatusAttendance {
+
+    Friend, CoDirector, COuncellor, CAmper, DITraining, Invited, Director,  UNdefined
+
+}
