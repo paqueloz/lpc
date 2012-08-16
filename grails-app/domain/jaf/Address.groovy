@@ -48,6 +48,6 @@ class Address {
     }
     
     def String toString() {
-        return street1 + " " + street2 ?: "" + " " + zipCode
+        "${street1} ${street2?:''} ${zipCode}"
     }
 }

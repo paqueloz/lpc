@@ -42,7 +42,7 @@ class Contact {
     }
 
     String toString() {
-        return "[" + mode + "]" + value +  "(" + type + ")"
+        return "[" + mode + "] " + value +  " (" + type + ")"
     }
 
 }

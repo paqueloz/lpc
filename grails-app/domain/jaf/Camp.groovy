@@ -23,7 +23,7 @@ package jaf
 class Camp {
 
     String location
-    Nationalities nationality
+    String country
     //Address addressHouse
     Contact contactHouse
     Person personHouse
@@ -31,7 +31,7 @@ class Camp {
 
     static constraints = {
         String location
-        nationality(nullable: true)
+        country(nullable: true)
         //AddressHouse(nullable: true)    No signature of method: jaf.Camp.AddressHouse() is applicable for argument types: (java.util.LinkedHashMap) values: [[nullable:true]]
         contactHouse(nullable: true)
         personHouse(nullable: true)}

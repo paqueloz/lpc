@@ -44,7 +44,9 @@ class Person {
     //Person father
     //Person mother
 
-    static hasMany = [contacts: Contact, attendances: Attendance,languages: LanguageLevel, addresses: Address, nationality: Nationalities]
+    static hasMany = [contacts: Contact, attendances: Attendance,
+    	languages: LanguageLevel, addresses: Address, 
+    	nationalities: Nationality]
 
 
     static constraints = {

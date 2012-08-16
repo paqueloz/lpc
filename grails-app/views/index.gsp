@@ -124,7 +124,7 @@
 		</div>
 		<div id="page-body" role="main">
 			<h1>Welcome to Grails</h1>
-			<p>Welcome to the admin site of ...</p>
+			<p>Welcome to the admin site of Luethi-Peterson Camps</p>
 
 			<div id="controller-list" role="navigation">
 				<h2>Available Controllers:</h2>
