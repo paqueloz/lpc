@@ -7,7 +7,8 @@
 		<g:message code="nationality.country.label" default="Country" />
 		
 	</label>
-	<g:textField name="country" value="${nationalityInstance?.country}"/>
+	<g:countrySelect name="country" value="${nationalityInstance?.country}" noSelection="['':'-Choose from list-']"/>                   
+<%--    <g:textField name="country" value="${nationalityInstance?.country}"/>--%>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: nationalityInstance, field: 'person', 'error')} required">

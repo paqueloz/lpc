@@ -67,3 +67,6 @@ grails.project.dependency.resolution = {
         build ":tomcat:$grailsVersion"
     }
 }
+
+// unsuccessful attempt to use the countries plugin with source code taken from github
+// grails.plugin.location.'countries'="../grails-countries-plugin"

@@ -37,6 +37,7 @@ environments {
             url = "jdbc:mysql://localhost/lpc"
             username = "root"
             password = "abcd"
+            logSql = true
         }
     }
     test {

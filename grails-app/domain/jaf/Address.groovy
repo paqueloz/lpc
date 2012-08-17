@@ -20,6 +20,8 @@
 
 package jaf
 
+import grails.plugins.countries.Country
+
 class Address {
 
     static belongsTo = [person:Person]
@@ -28,7 +30,7 @@ class Address {
     String street2
     String zipCode
     String city
-    String country
+    Country country
     boolean active
 
     Date dateCreated
@@ -44,7 +46,7 @@ class Address {
     }
 
     static searchable = {
-        except = ['dateCreated','lastUpdated']
+        except = ['dateCreated','lastUpdated','country']
     }
     
     def String toString() {

@@ -1,4 +1,14 @@
 eclipse.preferences.version=1
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_af.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_de.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_en.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_es.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_fr.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_it.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_nb_NO.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/countries_pt_BR.properties=UTF-8
+encoding//.link_to_grails_plugins/countries-0.3-SNAPSHOT/grails-app/i18n/messages.properties=UTF-8
 encoding//.link_to_grails_plugins/jquery-1.7.1/grails-app/i18n/messages.properties=UTF-8
 encoding//.link_to_grails_plugins/resources-1.1.6/grails-app/i18n/messages.properties=UTF-8
 encoding//.link_to_grails_plugins/spring-security-core-1.2.7.3/grails-app/i18n/spring-security-core.properties=UTF-8
