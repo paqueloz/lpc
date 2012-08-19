@@ -22,7 +22,7 @@ package jaf
 
 class Attendance {
 
-    static belongsTo = [camp: CampYear, person: Person]     // FIXME relationship with CampYear incomplete
+    static belongsTo = [camp: CampYear, person: Person]
     StatusAttendance status
     //CampType type //TODO ASK for the purpose
 

@@ -23,6 +23,9 @@ package jaf
 class CampYear {
 
     static belongsTo = [camp: Camp]
+    
+    static hasMany = [ attendances : Attendance ]
+    
     int year
 
     static constraints = {
