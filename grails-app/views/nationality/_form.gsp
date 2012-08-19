@@ -2,13 +2,14 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: nationalityInstance, field: 'country', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: nationalityInstance, field: 'country', 'error')} required">
 	<label for="country">
 		<g:message code="nationality.country.label" default="Country" />
-		
+		<span class="required-indicator">*</span>
 	</label>
-	<g:countrySelect name="country" value="${nationalityInstance?.country}" noSelection="['':'-Choose from list-']"/>                   
-<%--    <g:textField name="country" value="${nationalityInstance?.country}"/>--%>
+<%--	<g:select id="country" name="country.id" from="${grails.plugins.countries.Country.list()}" optionKey="id" required="" value="${nationalityInstance?.country?.id}" class="many-to-one"/>--%>
+<country:select name="country.id" value="${nationalityInstance?.country?.id}" 
+noSelection="['':'select please:']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: nationalityInstance, field: 'person', 'error')} required">

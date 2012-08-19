@@ -24,7 +24,7 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="country" title="${message(code: 'nationality.country.label', default: 'Country')}" />
+						<th><g:message code="nationality.country.label" default="Country" /></th>
 					
 						<th><g:message code="nationality.person.label" default="Person" /></th>
 					
@@ -34,7 +34,10 @@
 				<g:each in="${nationalityInstanceList}" status="i" var="nationalityInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${nationalityInstance.id}">${fieldValue(bean: nationalityInstance, field: "country")}</g:link></td>
+						<td>
+<%--                        <g:link action="show" id="${nationalityInstance.id}">${fieldValue(bean: nationalityInstance, field: "country")}</g:link>--%>
+<country:name object="${nationalityInstance?.country}"/>
+                        </td>
 					
 						<td>${fieldValue(bean: nationalityInstance, field: "person")}</td>
 					

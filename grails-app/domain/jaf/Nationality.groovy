@@ -1,17 +1,18 @@
 package jaf
 
+import grails.plugins.countries.Country
+
 class Nationality {
 
     static belongsTo = [person:Person]
 
-    String country
+    Country country
 
     static constraints = {
     }
 
-    def String toString() {
-        return country
+    String toString() {
+        country.key
     }
-
 }
 

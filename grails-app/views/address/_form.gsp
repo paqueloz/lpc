@@ -42,7 +42,7 @@
 <%--	<g:select id="country" name="country.id" from="${grails.plugins.countries.Country.list()}" --%>
 <%--    optionKey="id" value="${addressInstance?.country?.id}" class="many-to-one" --%>
 <%--    noSelection="['null': '']"/>--%>
-<country:select name="country.id" value="${fieldValue(bean:addressInstance,field:'country.id')}" 
+<country:select name="country.id" value="${addressInstance?.country?.id}" 
 noSelection="['':'select please:']"/>
 </div>
 

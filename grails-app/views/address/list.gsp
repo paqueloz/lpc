@@ -50,7 +50,10 @@
 					
 						<td>${fieldValue(bean: addressInstance, field: "city")}</td>
 					
-						<td>${fieldValue(bean: addressInstance, field: "country")}</td>
+						<td>
+<%--                        ${fieldValue(bean: addressInstance, field: "country")}--%>
+                        <country:name object="${addressInstance?.country}"/>
+                        </td>
 					
 						<td><g:formatBoolean boolean="${addressInstance.active}" /></td>
 					

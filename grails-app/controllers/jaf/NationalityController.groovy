@@ -21,8 +21,6 @@ class NationalityController {
 
     def save() {
         def nationalityInstance = new Nationality(params)
-        nationalityInstance.setCountry(params.country)
-        nationalityInstance.setPerson(Person.get(params.person.id))
         if (!nationalityInstance.save(flush: true)) {
             render(view: "create", model: [nationalityInstance: nationalityInstance])
             return

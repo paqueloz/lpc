@@ -27,7 +27,10 @@
 				<li class="fieldcontain">
 					<span id="country-label" class="property-label"><g:message code="nationality.country.label" default="Country" /></span>
 					
-						<span class="property-value" aria-labelledby="country-label"><g:fieldValue bean="${nationalityInstance}" field="country"/></span>
+					<span class="property-value" aria-labelledby="country-label">
+<%--					<g:link controller="country" action="show" id="${nationalityInstance?.country?.id}">${nationalityInstance?.country?.encodeAsHTML()}</g:link>--%>
+<country:name object="${nationalityInstance?.country}"/>
+					</span>
 					
 				</li>
 				</g:if>
