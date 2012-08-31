@@ -47,6 +47,8 @@ class Person {
     static hasMany = [contacts: Contact, attendances: Attendance,
     	languages: LanguageLevel, addresses: Address, 
     	nationalities: Nationality]
+	// Test de synchonisation gIT (Jacques Flumet lignes de commentaires)
+	// .. rappel .... Il faudra  ne pointer que sur une seule adresse
 
 
     static constraints = {
