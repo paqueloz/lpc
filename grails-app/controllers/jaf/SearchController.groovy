@@ -1,10 +1,21 @@
 package jaf
 
+import org.compass.core.engine.SearchEngineQueryParseException
+
 class SearchController {
 
     def searchableService
     
-    def index() { }
+    def index() { 
+        if (!params.q?.trim()) {
+            return [:]
+        }
+        try {
+            return [searchResult: searchableService.search(params.q, params)]
+        } catch (SearchEngineQueryParseException ex) {
+            return [parseException: true]
+        }
+    }
     
     /**
      * Refresh searchable index
