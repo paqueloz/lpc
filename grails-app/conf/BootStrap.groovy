@@ -1,7 +1,10 @@
+import jaf.ContactMode;
+import jaf.ContactType;
 import jaf.Gender;
 import jaf.LastStatus;
 import jaf.Person;
 import jaf.Address;
+import jaf.Contact;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,6 +78,35 @@ class BootStrap {
                                         active  : true,
                                         )
             a.save(failOnError: true)
+            
+            Contact c = new Contact (   person  : p,
+                                        type    : ContactType.PHONE, 
+                                        mode    : ContactMode.HOME, 
+                                        value   : "+41 22 755 15 80",
+                                        active  : true,
+                                        )
+            c.save(failOnError: true)
+            c = new Contact (           person  : p,
+                                        type    : ContactType.EMAIL, 
+                                        mode    : ContactMode.HOME, 
+                                        value   : "paqueloz@gmail.com",
+                                        active  : true,
+                                        )
+            c.save(failOnError: true)
+            c = new Contact (           person  : p,
+                                        type    : ContactType.MOBILE, 
+                                        mode    : ContactMode.HOME, 
+                                        value   : "+41 79 768 30 17",
+                                        active  : true,
+                                        )
+            c.save(failOnError: true)
+            c = new Contact (           person  : p,
+                                        type    : ContactType.EMAIL, 
+                                        mode    : ContactMode.WORK, 
+                                        value   : "queloz@rembo.com",
+                                        active  : false,
+                                        )
+            c.save(failOnError: true)
         }
         
     }
