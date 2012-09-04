@@ -38,8 +38,10 @@
         <r:layoutResources />
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="http://luethipetersoncamps.org/">
-            Luethi-Peterson Camps International</a></div>
+		<div id="grailsLogo" role="banner">
+            <img src="<g:createLinkTo dir='images' file='fuzziestitle.png' />" alt="logo"/>
+            <a href="http://luethipetersoncamps.org/">Luethi-Peterson Camps International</a>
+        </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

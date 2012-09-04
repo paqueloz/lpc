@@ -135,9 +135,9 @@ class BootStrap {
             Nationality n = new Nationality ( person: p, country: Country.findByShortKey("CH") )
             n.save(failOnError: true)
             
-            Person pelet = new Person(  firstName   : "Pascal",
-                                        lastName    : "Satos",
-                                        birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1969-06-09"),
+            Person pelet = new Person(  firstName   : "Big",
+                                        lastName    : "Boss",
+                                        birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1969-01-02"),
                                         gender      : Gender.MALE,
                                         status      : LastStatus.Director).save(failOnError: true)
             Camp k = new Camp(          location    : "Evolène",
