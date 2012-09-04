@@ -1,3 +1,12 @@
+import jaf.Gender;
+import jaf.LastStatus;
+import jaf.Person;
+import jaf.Address;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 /*
  * This program is intended to help the Luethi-Peterson Camps association
  *     to help them store and manage their users
@@ -18,6 +27,7 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import grails.plugins.countries.Country;
 import grails.util.Environment
 
 import jaf.SecRole
@@ -47,7 +57,62 @@ class BootStrap {
             SecUserSecRole.create adminUser, adminRole
             SecUserSecRole.create adminUser, userRole
         }
+        
+        if (currentEnv == Environment.DEVELOPMENT) {
+            Person p = new Person(  firstName   : "Pierre-Antoine", 
+                                    lastName    : "Queloz",
+                                    birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1971-03-30"), // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                                    gender      : Gender.MALE,
+                                    status      : LastStatus.UNdefined,
+                                    )
+            p.save(failOnError: true)
+            
+            Address a = new Address (   person  : p,
+                                        street1 : "11 ch du Lac",
+                                        zipCode : "1290",
+                                        city    : "Versoix",
+                                        country : Country.findByShortKey("CH"),
+                                        active  : true,
+                                        )
+            a.save(failOnError: true)
+        }
+        
     }
     def destroy = {
     }
 }
+
+/*
+class Address {
+
+    static belongsTo = [person:Person]
+
+    String street1
+    String street2
+    String zipCode
+    String city
+    Country country
+    boolean active
+
+    Date dateCreated
+    Date lastUpdated
+
+    static constraints = {
+        street1()
+        street2(nullable: true)
+        zipCode(nullable: true)
+        city(nullable: true)
+        country(nullable: true)
+        active()
+    }
+
+    static searchable = {
+        except = ['dateCreated','lastUpdated','country']
+    }
+    
+    def String toString() {
+        "${street1} ${street2?:''} ${zipCode}"
+    }
+}
+
+*/
