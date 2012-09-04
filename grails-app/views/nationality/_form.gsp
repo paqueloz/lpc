@@ -15,8 +15,8 @@ noSelection="['':'select please:']"/>
 <div class="fieldcontain ${hasErrors(bean: nationalityInstance, field: 'person', 'error')} required">
 	<label for="person">
 		<g:message code="nationality.person.label" default="Person" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="person" name="person.id" from="${jaf.Person.list()}" optionKey="id" required="" value="${nationalityInstance?.person?.id}" class="many-to-one"/>
+    <g:link controller="person" action="show" id="${nationalityInstance?.person?.id}">${nationalityInstance?.person?.encodeAsHTML()}</g:link>
+    <g:hiddenField name="person.id" value="${nationalityInstance?.person?.id}" />
 </div>
 

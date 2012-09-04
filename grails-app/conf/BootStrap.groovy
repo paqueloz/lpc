@@ -2,6 +2,7 @@ import jaf.ContactMode;
 import jaf.ContactType;
 import jaf.Gender;
 import jaf.LastStatus;
+import jaf.Nationality
 import jaf.Person;
 import jaf.Address;
 import jaf.Contact;
@@ -126,6 +127,10 @@ class BootStrap {
                                         level       : Level.FLUENT,
                                         )
             l.save(failOnError: true)
+            
+            Nationality n = new Nationality ( person: p, country: Country.findByShortKey("CH") )
+            n.save(failOnError: true)
+            
         }
         
     }
@@ -133,37 +138,3 @@ class BootStrap {
     }
 }
 
-/*
-class Address {
-
-    static belongsTo = [person:Person]
-
-    String street1
-    String street2
-    String zipCode
-    String city
-    Country country
-    boolean active
-
-    Date dateCreated
-    Date lastUpdated
-
-    static constraints = {
-        street1()
-        street2(nullable: true)
-        zipCode(nullable: true)
-        city(nullable: true)
-        country(nullable: true)
-        active()
-    }
-
-    static searchable = {
-        except = ['dateCreated','lastUpdated','country']
-    }
-    
-    def String toString() {
-        "${street1} ${street2?:''} ${zipCode}"
-    }
-}
-
-*/
