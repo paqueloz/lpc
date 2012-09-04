@@ -5,6 +5,8 @@ import jaf.LastStatus;
 import jaf.Person;
 import jaf.Address;
 import jaf.Contact;
+import jaf.LanguageLevel;
+import jaf.Level;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -107,6 +109,23 @@ class BootStrap {
                                         active  : false,
                                         )
             c.save(failOnError: true)
+            
+            LanguageLevel l = new LanguageLevel (
+                                        person      : p,
+                                        language    : new Locale("fr","CH"),
+                                        level       : Level.MOTHERTONGUE,
+                                        )
+            l.save(failOnError: true)
+            l = new LanguageLevel (     person      : p,
+                                        language    : new Locale("de","DE"),
+                                        level       : Level.GOOD,
+                                        )
+            l.save(failOnError: true)
+            l = new LanguageLevel (     person      : p,
+                                        language    : new Locale("en"),
+                                        level       : Level.FLUENT,
+                                        )
+            l.save(failOnError: true)
         }
         
     }
