@@ -1,3 +1,6 @@
+import jaf.Attendance
+import jaf.Camp
+import jaf.CampYear
 import jaf.ContactMode;
 import jaf.ContactType;
 import jaf.Gender;
@@ -8,6 +11,7 @@ import jaf.Address;
 import jaf.Contact;
 import jaf.LanguageLevel;
 import jaf.Level;
+import jaf.StatusAttendance;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -130,6 +134,27 @@ class BootStrap {
             
             Nationality n = new Nationality ( person: p, country: Country.findByShortKey("CH") )
             n.save(failOnError: true)
+            
+            Person pelet = new Person(  firstName   : "Pascal",
+                                        lastName    : "Satos",
+                                        birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1969-06-09"),
+                                        gender      : Gender.MALE,
+                                        status      : LastStatus.Director).save(failOnError: true)
+            Camp k = new Camp(          location    : "Evolène",
+                                        country     : "Suisse",
+                                        personHouse : pelet).save(failOnError: true)
+                                        
+            CampYear ky = new CampYear( camp : k, year : 1986 ).save(failOnError: true)
+            
+            ky = new CampYear( camp : k, year : 1987 ).save(failOnError: true)
+            Attendance at = new Attendance(person: p, camp: ky, status: StatusAttendance.CAmper).save(failOnError: true)
+            at = new Attendance(person: pelet, camp: ky, status: StatusAttendance.Director).save(failOnError: true)
+            
+            ky = new CampYear( camp : k, year : 1988 ).save(failOnError: true)                            
+            at = new Attendance(person: p, camp: ky, status: StatusAttendance.CAmper).save(failOnError: true)
+            at = new Attendance(person: pelet, camp: ky, status: StatusAttendance.Director).save(failOnError: true)
+            
+            ky = new CampYear( camp : k, year : 1989 ).save(failOnError: true)      
             
         }
         

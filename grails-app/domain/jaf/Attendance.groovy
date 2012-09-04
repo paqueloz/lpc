@@ -30,7 +30,7 @@ class Attendance {
     }
 
     def String toString() {
-        return person + " in " + camp
+        return person.toString() + " in " + camp.toString()
     }
 }
 
