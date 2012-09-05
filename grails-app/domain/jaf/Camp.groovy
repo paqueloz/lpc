@@ -22,11 +22,11 @@ package jaf
 
 class Camp {
 
-    String location
-    String country
-    //Address addressHouse
+    String location     // name of the house
+    String country      // TODO use grails.plugins.countries.Country
+    // Address addressHouse TODO store an address that doesn't belong to a Person
     Contact contactHouse
-    Person personHouse
+    Person personHouse  // TODO several persons with different roles and a history
     static hasMany = [years : CampYear]
 
     static constraints = {

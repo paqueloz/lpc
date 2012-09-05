@@ -4,14 +4,14 @@ import jaf.CampYear
 import jaf.ContactMode;
 import jaf.ContactType;
 import jaf.Gender;
-import jaf.LastStatus;
+import jaf.PersonStatus;
 import jaf.Nationality
 import jaf.Person;
 import jaf.Address;
 import jaf.Contact;
 import jaf.LanguageLevel;
 import jaf.Level;
-import jaf.StatusAttendance;
+import jaf.PersonStatus;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -73,7 +73,7 @@ class BootStrap {
                                     lastName    : "Queloz",
                                     birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1971-03-30"), // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                                     gender      : Gender.MALE,
-                                    status      : LastStatus.UNdefined,
+                                    status      : PersonStatus.UNdefined,
                                     )
             p.save(failOnError: true)
             
@@ -139,7 +139,7 @@ class BootStrap {
                                         lastName    : "Boss",
                                         birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1969-01-02"),
                                         gender      : Gender.MALE,
-                                        status      : LastStatus.Director).save(failOnError: true)
+                                        status      : PersonStatus.Director).save(failOnError: true)
             Camp k = new Camp(          location    : "Evolène",
                                         country     : "Suisse",
                                         personHouse : pelet).save(failOnError: true)
@@ -147,12 +147,12 @@ class BootStrap {
             CampYear ky = new CampYear( camp : k, year : 1986 ).save(failOnError: true)
             
             ky = new CampYear( camp : k, year : 1987 ).save(failOnError: true)
-            Attendance at = new Attendance(person: p, camp: ky, status: StatusAttendance.CAmper).save(failOnError: true)
-            at = new Attendance(person: pelet, camp: ky, status: StatusAttendance.Director).save(failOnError: true)
+            Attendance at = new Attendance(person: p, camp: ky, status: PersonStatus.CAmper).save(failOnError: true)
+            at = new Attendance(person: pelet, camp: ky, status: PersonStatus.Director).save(failOnError: true)
             
             ky = new CampYear( camp : k, year : 1988 ).save(failOnError: true)                            
-            at = new Attendance(person: p, camp: ky, status: StatusAttendance.CAmper).save(failOnError: true)
-            at = new Attendance(person: pelet, camp: ky, status: StatusAttendance.Director).save(failOnError: true)
+            at = new Attendance(person: p, camp: ky, status: PersonStatus.CAmper).save(failOnError: true)
+            at = new Attendance(person: pelet, camp: ky, status: PersonStatus.Director).save(failOnError: true)
             
             ky = new CampYear( camp : k, year : 1989 ).save(failOnError: true)      
             

@@ -41,6 +41,7 @@
 		<div id="grailsLogo" role="banner">
             <img src="<g:createLinkTo dir='images' file='fuzziestitle.png' />" alt="logo"/>
             <a href="http://luethipetersoncamps.org/">Luethi-Peterson Camps International</a>
+            <g:link controller="logout">Logout</g:link>
         </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>

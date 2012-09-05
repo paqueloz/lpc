@@ -28,21 +28,18 @@ class Person {
     Date birthDay
     Date deathDay
 
-    //Nationality nationality //TODO convert it into an enumeration
-
     String preferences
     Gender gender
 
     boolean rejected
-    LastStatus status
+    PersonStatus status     // last (highest?) attendance status
+                            // TODO search feature (by status)
+                            // TODO easy way to list attendances with role
 
-    boolean newClient //TODO ASK jacques for the purpose
+    boolean newClient       // TODO ASK Jacques for the purpose
 
     Date dateCreated
     Date lastUpdated
-
-    //Person father
-    //Person mother
 
     static hasMany = [contacts: Contact, attendances: Attendance,
     	languages: LanguageLevel, addresses: Address, 
@@ -54,11 +51,8 @@ class Person {
     static constraints = {
         firstName(blank: false)
         lastName(blank: false)
-        // nationality()
         birthDay()
         deathDay(nullable: true)
-        //father(nullable: true)
-        //mother(nullable: true)
         preferences(nullable: true)
     }
 
@@ -76,8 +70,7 @@ enum Gender {
     MALE, FEMALE, UNdefined
 }
 
-enum LastStatus {
-
-    Friend, CoDirector, COuncellor, CAmper, DITraining, Invited, Director,  UNdefined
-
+// TODO prevent value Invited in Person
+enum PersonStatus {
+    Friend, CoDirector, COuncellor, CAmper, DITraining, Invited, Director, UNdefined
 }

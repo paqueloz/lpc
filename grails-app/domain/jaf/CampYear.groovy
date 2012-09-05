@@ -22,7 +22,9 @@ package jaf
 
 class CampYear {
 
-    static belongsTo = [camp: Camp]
+    // TODO begin and end date
+    
+    static belongsTo = [ camp : Camp ]
     
     static hasMany = [ attendances : Attendance ]
     
