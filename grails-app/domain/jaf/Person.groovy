@@ -22,6 +22,8 @@ package jaf
 
 class Person {
 
+    // TODO add picture
+    
     String firstName
     String lastName
 
@@ -43,7 +45,7 @@ class Person {
 
     static hasMany = [contacts: Contact, attendances: Attendance,
     	languages: LanguageLevel, addresses: Address, 
-    	nationalities: Nationality]
+    	nationalities: Nationality, involvements: Staff]
 	// Test de synchonisation gIT (Jacques Flumet lignes de commentaires)
 	// .. rappel .... Il faudra  ne pointer que sur une seule adresse
 

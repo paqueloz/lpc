@@ -7,20 +7,19 @@ class PersonRelation {
     Person pers1
     Person pers2
 
+    String comment
 
     static constraints = {
         pers1()
         relationShip(nullable: false)
         pers2()
+        comment(nullable : true)
     }
 }
 
-// FIXME comment on gère les réciproques?
+// e.g pers1 is *mother* of pers2
 
 enum RelationShip {
-    mother, father,  // [from son, daughter]
-    sister, brother
-
-    //TODO fill the list of nationalities
+    mother, father
 }
 

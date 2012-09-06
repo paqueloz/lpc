@@ -20,21 +20,29 @@
 
 package jaf
 
+import grails.plugins.countries.Country
+
 class Camp {
 
     String location     // name of the house
-    String country      // TODO use grails.plugins.countries.Country
-    // Address addressHouse TODO store an address that doesn't belong to a Person
-    Contact contactHouse
-    Person personHouse  // TODO several persons with different roles and a history
-    static hasMany = [years : CampYear]
+    String street1
+    String street2
+    String zipCode
+    String city
+    Country country
+    Contact contact     // for phone number
+    static hasMany = [ years : CampYear, staff : Staff ]
+    
+    // TODO add picture
 
     static constraints = {
-        String location
+        location()
+        street1(nullable: true)
+        street2(nullable: true)
+        zipCode(nullable: true)
+        city(nullable: true)
         country(nullable: true)
-        //AddressHouse(nullable: true)    No signature of method: jaf.Camp.AddressHouse() is applicable for argument types: (java.util.LinkedHashMap) values: [[nullable:true]]
-        contactHouse(nullable: true)
-        personHouse(nullable: true)
+        contact(nullable: true)
     }
     
     static searchable = {

@@ -12,6 +12,7 @@ import jaf.Contact;
 import jaf.LanguageLevel;
 import jaf.Level;
 import jaf.PersonStatus;
+import jaf.Staff
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -141,7 +142,7 @@ class BootStrap {
                                         gender      : Gender.MALE,
                                         status      : PersonStatus.Director).save(failOnError: true)
             Camp k = new Camp(          location    : "Evolène",
-                                        country     : "Suisse",
+                                        country     : Country.findByShortKey("CH"),
                                         personHouse : pelet).save(failOnError: true)
                                         
             CampYear ky = new CampYear( camp : k, year : 1986 ).save(failOnError: true)
@@ -156,6 +157,15 @@ class BootStrap {
             
             ky = new CampYear( camp : k, year : 1989 ).save(failOnError: true)      
             
+            Person mario = new Person(  firstName    : "Super",
+                                        lastName    : "Mario",
+                                        birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1980-08-04"),
+                                        gender      : Gender.MALE,
+                                        status      : PersonStatus.UNdefined).save(failOnError: true)
+            Staff smario = new Staff(   person      : mario,
+                                        camp        : k,
+                                        comment     : "plombier",
+                                        startDate   : new SimpleDateFormat("yyyy-MM-dd").parse("2000-08-04")).save(failOnError:true)
         }
         
     }
