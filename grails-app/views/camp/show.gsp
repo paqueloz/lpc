@@ -98,7 +98,9 @@
 					<span id="staff-label" class="property-label"><g:message code="camp.staff.label" default="Staff" /></span>
 					
 						<g:each in="${campInstance.staff}" var="s">
-						<span class="property-value" aria-labelledby="staff-label"><g:link controller="staff" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="staff-label">
+                        <g:link controller="staff" action="show" id="${s.id}">${s?.toStringForCamp().encodeAsHTML()}</g:link>
+                        </span>
 						</g:each>
 					
 				</li>
