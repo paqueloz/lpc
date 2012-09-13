@@ -23,9 +23,9 @@
   
   <div id="header">
 <%--    <h1><a href="http://grails.org/Searchable+Plugin" target="_blank">Grails <span>Searchable</span> Plugin</a></h1>--%>
-    <h1>Type your search query in the box below</h1>
+    <h1><g:message code="search.type.your.query" default="Type your search query in the box below"/></h1>
     <g:form url='[controller: "search", action: "index"]' id="searchableForm" name="searchableForm" method="get">
-        <g:textField name="q" value="${params.q}" size="50"/> <input type="submit" value="Search" />
+        <g:textField name="q" value="${params.q}" size="50"/> <input type="submit" value="<g:message code="general.search" default="Search"/>" />
     </g:form>
     <div style="clear: both; display: none;" class="hint">See <a href="http://lucene.apache.org/java/docs/queryparsersyntax.html">Lucene query syntax</a> for advanced queries</div>
   </div>

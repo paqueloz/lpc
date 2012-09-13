@@ -136,9 +136,9 @@
 				</ul>
             --%>
               <ul>
-                <li class="controller"><g:link controller="person">Manage people</g:link></li>
-                <li class="controller"><g:link controller="camp">Manage camps</g:link></li>
-                <li class="controller"><g:link controller="search">Search</g:link></li>
+                <li class="controller"><g:link controller="person"><g:message code="general.manage.people" default="Manage people" /></g:link></li>
+                <li class="controller"><g:link controller="camp"><g:message code="general.manage.camps" default="Manage camps" /></g:link></li>
+                <li class="controller"><g:link controller="search"><g:message code="general.search" default="Search" /></g:link></li>
               </ul>
               <h2>Actions (development):</h2>
               <ul>

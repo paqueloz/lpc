@@ -42,7 +42,8 @@
             <img src="<g:createLinkTo dir='images' file='fuzziestitle.png' />" alt="logo"/>
             <a href="http://luethipetersoncamps.org/">Luethi-Peterson Camps International</a>
             <sec:ifLoggedIn>
-                Logged in as <b><sec:username/></b> <g:link controller="logout">Logout</g:link>
+                <g:message code="general.logged.in.as" default="Logged in as" /> <b><sec:username/></b> <g:link controller="logout">
+                <g:message code="general.logout" default="Logout" /></g:link>
             </sec:ifLoggedIn>
         </div>
 		<g:layoutBody/>
