@@ -23,6 +23,33 @@
 			</g:if>
 			<ol class="property-list contact">
 			
+                <g:if test="${contactInstance?.person}">
+                <li class="fieldcontain">
+                    <span id="person-label" class="property-label"><g:message code="contact.person.label" default="Person" /></span>
+                    
+                        <span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${contactInstance?.person?.id}">${contactInstance?.person?.encodeAsHTML()}</g:link></span>
+                    
+                </li>
+                </g:if>
+            
+                <g:if test="${contactInstance?.type}">
+                <li class="fieldcontain">
+                    <span id="type-label" class="property-label"><g:message code="contact.type.label" default="Type" /></span>
+                    
+                        <span class="property-value" aria-labelledby="type-label"><g:fieldValue bean="${contactInstance}" field="type"/></span>
+                    
+                </li>
+                </g:if>
+            
+                <g:if test="${contactInstance?.mode}">
+                <li class="fieldcontain">
+                    <span id="mode-label" class="property-label"><g:message code="contact.mode.label" default="Mode" /></span>
+                    
+                        <span class="property-value" aria-labelledby="mode-label"><g:fieldValue bean="${contactInstance}" field="mode"/></span>
+                    
+                </li>
+                </g:if>
+            
 				<g:if test="${contactInstance?.value}">
 				<li class="fieldcontain">
 					<span id="value-label" class="property-label"><g:message code="contact.value.label" default="Value" /></span>
@@ -59,34 +86,8 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${contactInstance?.mode}">
-				<li class="fieldcontain">
-					<span id="mode-label" class="property-label"><g:message code="contact.mode.label" default="Mode" /></span>
-					
-						<span class="property-value" aria-labelledby="mode-label"><g:fieldValue bean="${contactInstance}" field="mode"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${contactInstance?.person}">
-				<li class="fieldcontain">
-					<span id="person-label" class="property-label"><g:message code="contact.person.label" default="Person" /></span>
-					
-						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${contactInstance?.person?.id}">${contactInstance?.person?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${contactInstance?.type}">
-				<li class="fieldcontain">
-					<span id="type-label" class="property-label"><g:message code="contact.type.label" default="Type" /></span>
-					
-						<span class="property-value" aria-labelledby="type-label"><g:fieldValue bean="${contactInstance}" field="type"/></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
+
+    			</ol>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${contactInstance?.id}" />

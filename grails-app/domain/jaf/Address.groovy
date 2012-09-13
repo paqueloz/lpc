@@ -37,6 +37,7 @@ class Address {
     Date lastUpdated
 
     static constraints = {
+        person(nullable: false)
         street1()
         street2(nullable: true)
         zipCode(nullable: true)

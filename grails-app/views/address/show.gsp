@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list address">
 			
+				<g:if test="${addressInstance?.person}">
+				<li class="fieldcontain">
+					<span id="person-label" class="property-label"><g:message code="address.person.label" default="Person" /></span>
+					
+						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${addressInstance?.person?.id}">${addressInstance?.person?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${addressInstance?.street1}">
 				<li class="fieldcontain">
 					<span id="street1-label" class="property-label"><g:message code="address.street1.label" default="Street1" /></span>
@@ -97,15 +106,6 @@
 					<span id="lastUpdated-label" class="property-label"><g:message code="address.lastUpdated.label" default="Last Updated" /></span>
 					
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${addressInstance?.lastUpdated}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${addressInstance?.person}">
-				<li class="fieldcontain">
-					<span id="person-label" class="property-label"><g:message code="address.person.label" default="Person" /></span>
-					
-						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${addressInstance?.person?.id}">${addressInstance?.person?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

@@ -70,7 +70,7 @@
     <li><g:link controller="staff" action="show" id="${s.id}">${s?.toStringForCamp().encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
-<g:link controller="staff" action="create" params="['camp.id': campInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'housePerson.label', default: 'HousePerson')])}</g:link>
+<g:link controller="staff" action="create" params="['camp.id': campInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'staff.label', default: 'Staff')])}</g:link>
 </li>
 </ul>
 

@@ -2,6 +2,22 @@
 
 
 
+<%-- <div class="fieldcontain ${hasErrors(bean: addressInstance, field: 'person', 'error')} required">
+	<label for="person">
+		<g:message code="address.person.label" default="Person" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="person" name="person.id" from="${jaf.Person.list()}" optionKey="id" required="" value="${addressInstance?.person?.id}" class="many-to-one"/>
+</div> --%>
+
+<div class="fieldcontain ${hasErrors(bean: addressInstance, field: 'person', 'error')} required">
+	<label for="person">
+		<g:message code="address.person.label" default="Person" />
+	</label>
+    <g:link controller="person" action="show" id="${addressInstance?.person?.id}">${addressInstance?.person?.encodeAsHTML()}</g:link>
+    <g:hiddenField name="person.id" value="${addressInstance?.person?.id}" />
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: addressInstance, field: 'street1', 'error')} ">
 	<label for="street1">
 		<g:message code="address.street1.label" default="Street1" />
@@ -52,13 +68,5 @@ noSelection="['':'select please:']"/>
 		
 	</label>
 	<g:checkBox name="active" value="${addressInstance?.active}" />
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: addressInstance, field: 'person', 'error')} required">
-	<label for="person">
-		<g:message code="address.person.label" default="Person" />
-	</label>
-    <g:link controller="person" action="show" id="${addressInstance?.person?.id}">${addressInstance?.person?.encodeAsHTML()}</g:link>
-    <g:hiddenField name="person.id" value="${addressInstance?.person?.id}" />
 </div>
 

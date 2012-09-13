@@ -33,29 +33,37 @@ class Person {
     String preferences
     Gender gender
 
-    boolean rejected
-    PersonStatus status     // last (highest?) attendance status
-                            // TODO search feature (by status)
-                            // TODO easy way to list attendances with role
+    boolean appliedForNextYear  // participant has applied for next year
+    PersonStatus status         // last (highest?) attendance status
+                                // TODO search feature (by status)
+                                // TODO easy way to list attendances with role
 
-    boolean newClient       // TODO ASK Jacques for the purpose
+    boolean newToLpc            // first application
 
     Date dateCreated
     Date lastUpdated
 
     static hasMany = [contacts: Contact, attendances: Attendance,
-    	languages: LanguageLevel, addresses: Address, 
+    	languages: LanguageLevel, address: Address,
     	nationalities: Nationality, involvements: Staff]
-	// Test de synchonisation gIT (Jacques Flumet lignes de commentaires)
-	// .. rappel .... Il faudra  ne pointer que sur une seule adresse
-
 
     static constraints = {
         firstName(blank: false)
         lastName(blank: false)
+        gender()
         birthDay()
         deathDay(nullable: true)
+        address()
+        contacts()
+        nationalities()
+        languages()
+        attendances()
+        appliedForNextYear()
+        newToLpc()
         preferences(nullable: true)
+        status()
+        dateCreated()
+        lastUpdated()
     }
 
     static searchable = {

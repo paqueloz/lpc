@@ -24,6 +24,8 @@
 				<thead>
 					<tr>
 					
+						<th><g:message code="address.person.label" default="Person" /></th>
+					
 						<g:sortableColumn property="street1" title="${message(code: 'address.street1.label', default: 'Street1')}" />
 					
 						<g:sortableColumn property="street2" title="${message(code: 'address.street2.label', default: 'Street2')}" />
@@ -34,13 +36,13 @@
 					
 						<th><g:message code="address.country.label" default="Country" /></th>
 					
-						<g:sortableColumn property="active" title="${message(code: 'address.active.label', default: 'Active')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${addressInstanceList}" status="i" var="addressInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td>${fieldValue(bean: addressInstance, field: "person")}</td>
 					
 						<td><g:link action="show" id="${addressInstance.id}">${fieldValue(bean: addressInstance, field: "street1")}</g:link></td>
 					
@@ -53,10 +55,7 @@
 						<td>
 <%--                        ${fieldValue(bean: addressInstance, field: "country")}--%>
                         <country:name object="${addressInstance?.country}"/>
-                        </td>
-					
-						<td><g:formatBoolean boolean="${addressInstance.active}" /></td>
-					
+                        </td>					
 					</tr>
 				</g:each>
 				</tbody>

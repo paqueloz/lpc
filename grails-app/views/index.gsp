@@ -134,11 +134,17 @@
 						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
 					</g:each>
 				</ul>
-            --%><ul>
+            --%>
+              <ul>
                 <li class="controller"><g:link controller="person">Manage people</g:link></li>
                 <li class="controller"><g:link controller="camp">Manage camps</g:link></li>
                 <li class="controller"><g:link controller="search">Search</g:link></li>
-            </ul>
+              </ul>
+              <h2>Actions (development):</h2>
+              <ul>
+                <li class="controller"><g:link controller="testData">Generate test data</g:link></li>
+                <li class="controller"><g:link controller="address">Manage addresses</g:link></li>
+              </ul>
             </div>
 		</div>
 	</body>
