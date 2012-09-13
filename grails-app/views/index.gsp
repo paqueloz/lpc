@@ -144,6 +144,7 @@
               <ul>
                 <li class="controller"><g:link controller="testData">Generate test data</g:link></li>
                 <li class="controller"><g:link controller="address">Manage addresses</g:link></li>
+                <li class="controller"><g:link controller="personRelation">Manage relations</g:link></li>
               </ul>
             </div>
 		</div>

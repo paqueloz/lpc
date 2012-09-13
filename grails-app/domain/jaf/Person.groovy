@@ -23,7 +23,7 @@ package jaf
 class Person {
 
     // TODO add picture
-    
+
     String firstName
     String lastName
 
@@ -35,8 +35,8 @@ class Person {
 
     boolean appliedForNextYear  // participant has applied for next year
     PersonStatus status         // last (highest?) attendance status
-                                // TODO search feature (by status)
-                                // TODO easy way to list attendances with role
+    // TODO search feature (by status)
+    // TODO easy way to list attendances with role
 
     boolean newToLpc            // first application
 
@@ -44,8 +44,9 @@ class Person {
     Date lastUpdated
 
     static hasMany = [contacts: Contact, attendances: Attendance,
-    	languages: LanguageLevel, address: Address,
-    	nationalities: Nationality, involvements: Staff]
+        languages: LanguageLevel, address: Address,
+        nationalities: Nationality, involvements: Staff,
+        relationships: PersonRelation]
 
     static constraints = {
         firstName(blank: false)
@@ -57,6 +58,7 @@ class Person {
         contacts()
         nationalities()
         languages()
+        relationships()
         attendances()
         appliedForNextYear()
         newToLpc()
@@ -72,6 +74,16 @@ class Person {
 
     def String toString() {
         return firstName + " " + lastName
+    }
+
+    def beforeDelete() {
+        // remove relations
+        PersonRelation.withNewSession {
+            def relations = PersonRelation.findAllByOther(this)
+            for (PersonRelation rel in relations) {
+                rel.delete(flush: true)
+            }
+        }
     }
 }
 

@@ -153,6 +153,21 @@
                     </g:each></li>
             </g:if>
 
+            <g:if test="${personInstance?.relationships}">
+                <li class="fieldcontain"><span
+                    id="relationships-label" class="property-label"><g:message
+                            code="person.relationships.label"
+                            default="Relationships" /></span> <g:each
+                        in="${personInstance.relationships}" var="a">
+                        <span class="property-value"
+                            aria-labelledby="relationships-label"><g:link
+                                controller="personRelation" action="show"
+                                id="${a.id}">
+                                ${a?.encodeAsHTML()}
+                            </g:link></span>
+                    </g:each></li>
+            </g:if>
+
             <g:if test="${personInstance?.attendances}">
                 <li class="fieldcontain"><span
                     id="attendances-label" class="property-label"><g:message

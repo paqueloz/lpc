@@ -158,6 +158,29 @@
     </div>
 </g:if>
 
+<%-- Relationships: hide this area until Person is in the database --%>
+<g:if test="${personInstance?.id}">
+    <div
+        class="fieldcontain ${hasErrors(bean: personInstance, field: 'relationships', 'error')} ">
+        <label for="relationships"> <g:message
+                code="person.relationships.label" default="Relationships" />
+        </label>
+        <ul class="one-to-many">
+            <g:each in="${personInstance?.relationships?}" var="a">
+                <li><g:link controller="personRelation" action="show"
+                        id="${a.id}">
+                        ${a?.encodeAsHTML()}
+                    </g:link></li>
+            </g:each>
+            <li class="add"><g:link controller="personRelation"
+                    action="create"
+                    params="['person.id': personInstance?.id]">
+                    ${message(code: 'default.add.label', args: [message(code: 'person.relationships.label', default: 'Relationships')])}
+                </g:link></li>
+        </ul>
+    </div>
+</g:if>
+
 <%-- Attendances: hide this area until Person is in the database --%>
 <g:if test="${personInstance?.id}">
     <div

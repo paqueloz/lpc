@@ -29,6 +29,23 @@ class TestDataController {
                 )
         p.save(failOnError: true)
 
+        Person sop = new Person(  firstName   : "Soline",
+                lastName    : "Queloz",
+                birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1998-09-11"), // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                gender      : Gender.FEMALE,
+                status      : PersonStatus.UNdefined,
+                )
+        sop.save(failOnError: true)
+
+        PersonRelation pr = new PersonRelation(person : p,
+                relationship    : Relationship.father,
+                other           : sop,
+                comment         : "maxi king").save(failOnError: true)
+        pr = new PersonRelation(person : sop,
+                    relationship    : Relationship.daughter,
+                    other           : p,
+                    comment         : "so nice").save(failOnError: true)
+    
        Address a = new Address (   person  : p,
                 street1 : "11 ch du Lac",
                 zipCode : "1290",

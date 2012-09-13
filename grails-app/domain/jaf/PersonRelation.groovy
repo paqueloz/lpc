@@ -1,25 +1,35 @@
 package jaf
 
+/**
+ * Uni-directional relationship between two persons
+ * When a Person is deleted, the hasMany / belongsTo automatically deletes in one direction
+ * A beforeDelete hook in Person deletes in the reverse direction
+ * Bi-directional seems more difficult (e.g. for display)
+ */
 class PersonRelation {
 
-    RelationShip relationShip
+    Person          person
+    Relationship    relationship
+    Person          other
+    String          comment
 
-    Person pers1
-    Person pers2
-
-    String comment
+    static belongsTo = [ person : Person, other : Person ]
 
     static constraints = {
-        pers1()
-        relationShip(nullable: false)
-        pers2()
+        person()
+        relationship(nullable: false)
+        other()
         comment(nullable : true)
+    }
+    
+    String toString() {
+        "${relationship} of ${other}"
     }
 }
 
-// e.g pers1 is *mother* of pers2
+// e.g person is *mother* of other
 
-enum RelationShip {
-    mother, father
+enum Relationship {
+    mother, father, son, daughter
 }
 
