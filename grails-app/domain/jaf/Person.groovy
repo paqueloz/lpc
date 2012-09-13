@@ -53,7 +53,7 @@ class Person {
         gender()
         birthDay()
         deathDay(nullable: true)
-        address()
+        address(size: 0..1)         // enforced in view (not by scaffolding)
         contacts()
         nationalities()
         languages()

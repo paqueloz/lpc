@@ -77,11 +77,13 @@
                         ${c?.encodeAsHTML()}
                     </g:link></li>
             </g:each>
-            <li class="add"><g:link controller="address"
-                    action="create"
-                    params="['person.id': personInstance?.id]">
-                    ${message(code: 'default.add.label', args: [message(code: 'person.address.label', default: 'Address')])}
-                </g:link></li>
+            <g:if test="${personInstance?.address?.size()==0}">
+                <li class="add"><g:link controller="address"
+                        action="create"
+                        params="['person.id': personInstance?.id]">
+                        ${message(code: 'default.add.label', args: [message(code: 'person.address.label', default: 'Address')])}
+                    </g:link></li>
+            </g:if>
         </ul>
     </div>
 </g:if>
