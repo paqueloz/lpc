@@ -7,7 +7,7 @@
 		<g:message code="person.firstName.label" default="First Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="firstName" required="" value="${personInstance?.firstName}"/>
+	<g:textField name="firstName" required="" value="${personInstance?.firstName}" autofocus="autofocus"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'lastName', 'error')} required">

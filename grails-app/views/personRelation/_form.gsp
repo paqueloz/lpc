@@ -25,7 +25,13 @@
 		<g:message code="personRelation.other.label" default="Other" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="other" name="other.id" from="${jaf.Person.list()}" optionKey="id" required="" value="${personRelationInstance?.other?.id}" class="many-to-one"/>
+	<%--<g:select id="other" name="other.id" from="${jaf.Person.list()}" optionKey="id" required="" value="${personRelationInstance?.other?.id}" class="many-to-one"/>--%>
+    <gui:autoComplete id="other" 
+        resultName="result" labelField="name" idField="id" 
+        controller="person" action="autoCompleteJSON"
+        minQueryLength='1' queryDelay='0.3'
+        queryAppend="*" maxResultsDisplayed='20'
+    />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personRelationInstance, field: 'comment', 'error')} ">

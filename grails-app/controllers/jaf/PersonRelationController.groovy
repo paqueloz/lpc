@@ -19,15 +19,32 @@ class PersonRelationController {
         [personRelationInstance: new PersonRelation(params)]
     }
 
-    def save() {
-        def personRelationInstance = new PersonRelation(params)
-        if (!personRelationInstance.save(flush: true)) {
-            render(view: "create", model: [personRelationInstance: personRelationInstance])
+    def save = { PersonRelationSaveCommand prsc ->
+        if (prsc.hasErrors()) {
+            render(view: "create", model: [personRelationInstance: prsc])
+            return
+        }
+        def pri = new PersonRelation( person : prsc.person,
+                            relationship    : prsc.relationship,
+                            other           : Person.findById(prsc.other_id),
+                            comment         : prsc.comment )
+        if (!pri.save(flush: true)) {
+            render(view: "create", model: [personRelationInstance: pri])
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'personRelation.label', default: 'PersonRelation'), personRelationInstance.id])
-        redirect(action: "show", id: personRelationInstance.id)
+        // create the opposite
+        def opposite = new PersonRelation( person : pri.other,
+                relationship    : PersonRelation.opposite(pri.relationship,pri.other),
+                other           : pri.person,
+                comment         : pri.comment )
+        if (!opposite.save(flush: true)) {
+            render(view: "create", model: [personRelationInstance: pri])
+            return
+        }
+
+		flash.message = message(code: 'default.created.message', args: [message(code: 'personRelation.label', default: 'PersonRelation'), pri.id])
+        redirect(action: "show", id: pri.id)
     }
 
     def show() {
@@ -100,4 +117,24 @@ class PersonRelationController {
             redirect(action: "show", id: params.id)
         }
     }
+}
+
+class PersonRelationSaveCommand {
+
+    Person          person
+    Relationship    relationship
+    int             other_id
+    String          comment
+
+    static constraints = {
+        person()
+        relationship(nullable: false)
+        comment(nullable : true)
+        other_id( nullable:false,
+            validator: { other_id, prsc ->
+                return other_id != prsc.person.id
+            }   
+        )
+    }
+
 }

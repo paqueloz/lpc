@@ -20,6 +20,8 @@
 
 package jaf
 
+import java.text.SimpleDateFormat
+
 class Person {
 
     // TODO add picture
@@ -72,8 +74,33 @@ class Person {
         only = ['firstName','lastName','preferences']
     }
 
-    def String toString() {
+    String toString() {
         return firstName + " " + lastName
+    }
+
+    String toStringForSearch() {
+        StringBuffer result = new StringBuffer(toString())
+        // result.append("!")
+        if (birthDay) {
+            result.append(" (")
+            result.append(new SimpleDateFormat("yyyy-MM-dd").format(birthDay))
+            result.append(")")
+        }
+        if (address?.size()>0) {
+            def addrList = address.collect { Address it -> it } // horrible set coming from hasMany
+            Address a = addrList[0]
+            result.append(" ")
+            if (a.city) {
+                if (a.country) {
+                    result.append("${a.city},${a.country.key}")
+                } else {
+                    result.append("${a.city}")
+                }
+            } else if (a.country) {
+                result.append("${a.country.key}")
+            }
+        } 
+        return result.toString()
     }
 
     def beforeDelete() {

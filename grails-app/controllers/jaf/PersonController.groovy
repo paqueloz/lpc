@@ -1,6 +1,7 @@
 package jaf
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.JSON
 
 class PersonController {
 
@@ -99,5 +100,22 @@ class PersonController {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'person.label', default: 'Person'), params.id])
             redirect(action: "show", id: params.id)
         }
+    }
+
+    /**
+     * Return a list of persons for the auto-complete search box
+     */
+    def autoCompleteJSON = {
+        if (!params.query) {
+            return;
+        }
+        def list = Person.search("${params.query}*", [ reload : true ])     // default limit 10 results
+                                                                            // reload to concatenate birthDay and address
+        def jsonList = list.results.collect { Person p -> [ id : p.id, name : p.toStringForSearch() ] }
+        if (list.total > 10) {
+            jsonList << [ id : "", name : "${list.total-10} not displayed" ]
+        }
+        def jsonResult = [ result : jsonList ]
+        render jsonResult as JSON
     }
 }

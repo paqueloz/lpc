@@ -25,6 +25,17 @@ class PersonRelation {
     String toString() {
         "${relationship} of ${other}"
     }
+    
+    static Relationship opposite(Relationship r, Person p) {
+        switch(r) {
+            case "mother":
+            case "father": 
+                return (p.getGender() == Gender.MALE) ? Relationship.son : Relationship.daughter 
+            case "son":
+            case "daughter":
+                return (p.getGender() == Gender.MALE) ? Relationship.father : Relationship.mother
+        }
+    }
 }
 
 // e.g person is *mother* of other
