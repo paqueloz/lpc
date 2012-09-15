@@ -2,6 +2,9 @@ package jaf
 
 
 
+import jaf.ContactMode;
+import jaf.ContactType;
+
 import org.junit.*
 import grails.test.mixin.*
 
@@ -12,8 +15,11 @@ class ContactControllerTests {
 
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+      params["person"] = new Person()
+      params["type"] = 'PHONE'
+      params["mode"] = 'HOME'
+      params["value"] = '00 33 44 55'
+      params["active"] = 'false'
     }
 
     void testIndex() {
@@ -105,7 +111,7 @@ class ContactControllerTests {
 
         // test invalid parameters in update
         params.id = contact.id
-        //TODO: add invalid values to params object
+        params.type = 'NOT GOOD'
 
         controller.update()
 

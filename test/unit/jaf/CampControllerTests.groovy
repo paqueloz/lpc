@@ -2,7 +2,11 @@ package jaf
 
 
 
+import jaf.Contact;
+
 import org.junit.*
+
+import grails.plugins.countries.Country;
 import grails.test.mixin.*
 
 @TestFor(CampController)
@@ -12,8 +16,7 @@ class CampControllerTests {
 
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+      params["location"] = 'someValidName'
     }
 
     void testIndex() {
@@ -105,7 +108,7 @@ class CampControllerTests {
 
         // test invalid parameters in update
         params.id = camp.id
-        //TODO: add invalid values to params object
+        params.location = null
 
         controller.update()
 

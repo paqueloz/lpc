@@ -127,12 +127,12 @@ class PersonRelationSaveCommand {
     String          comment
 
     static constraints = {
-        person()
-        relationship(nullable: false)
+        person(nullable : false)
+        relationship(nullable : false)
         comment(nullable : true)
-        other_id( nullable:false,
-            validator: { other_id, prsc ->
-                return other_id != prsc.person.id
+        other_id(nullable : false,
+            validator : { other_id, prsc ->
+                return other_id != prsc.person?.id
             }   
         )
     }

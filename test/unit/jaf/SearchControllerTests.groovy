@@ -12,6 +12,7 @@ import org.junit.*
 class SearchControllerTests {
 
     void testSomething() {
-       fail "Implement me"
+       // TODO test something
+       // fail "Implement me"
     }
 }

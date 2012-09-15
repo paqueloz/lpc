@@ -4,6 +4,7 @@ package jaf
 
 import org.junit.*
 import grails.test.mixin.*
+import grails.plugins.countries.Country
 
 @TestFor(NationalityController)
 @Mock(Nationality)
@@ -12,8 +13,8 @@ class NationalityControllerTests {
 
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+      params["country"] = new Country()
+      params["person"] = new Person()
     }
 
     void testIndex() {
@@ -105,7 +106,7 @@ class NationalityControllerTests {
 
         // test invalid parameters in update
         params.id = nationality.id
-        //TODO: add invalid values to params object
+        params.country = null
 
         controller.update()
 

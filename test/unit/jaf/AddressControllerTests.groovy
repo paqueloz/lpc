@@ -3,6 +3,8 @@ package jaf
 
 
 import org.junit.*
+
+import grails.plugins.countries.Country;
 import grails.test.mixin.*
 
 @TestFor(AddressController)
@@ -12,8 +14,10 @@ class AddressControllerTests {
 
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+      params["person"] = new Person()
+      params["street1"] = 'rue du levant'
+      params["zipCode"] = '1220'
+      params["city"] = 'Vett'
     }
 
     void testIndex() {
@@ -105,7 +109,7 @@ class AddressControllerTests {
 
         // test invalid parameters in update
         params.id = address.id
-        //TODO: add invalid values to params object
+        params.person = null
 
         controller.update()
 
