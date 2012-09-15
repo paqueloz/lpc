@@ -26,7 +26,9 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<%--<g:select id="other" name="other.id" from="${jaf.Person.list()}" optionKey="id" required="" value="${personRelationInstance?.other?.id}" class="many-to-one"/>--%>
-    <gui:autoComplete id="other" 
+    <g:hiddenField name="other_id_old" value="${personRelationInstance?.other?.id}" />
+    <gui:autoComplete id="other"
+        value="${personRelationInstance?.other?.toStringForSearch()}" 
         resultName="result" labelField="name" idField="id" 
         controller="person" action="autoCompleteJSON"
         minQueryLength='1' queryDelay='0.3'

@@ -87,9 +87,26 @@ class PersonRelationController {
                 return
             }
         }
+        
+        // the search field is causing trouble to the next line
+        // personRelationInstance.properties = params
 
-        personRelationInstance.properties = params
-
+        personRelationInstance.relationship = params.relationship
+        personRelationInstance.comment = params.comment
+        if (!params.other_id) {
+            params.other_id = params.other_id_old
+        }
+        // FIXME the next test doesn't work
+        if (params.other_id == personRelationInstance.person.id) {
+            // FIXME change the message property
+            personRelationInstance.errors.rejectValue("other", "default.optimistic.locking.failure",
+                [message(code: 'personRelation.label', default: 'PersonRelation')] as Object[],
+                "Relation must be with a different person")
+            personRelationInstance.other = null
+            render(view: "edit", model: [personRelationInstance: personRelationInstance])
+            return
+        }
+        personRelationInstance.other = Person.findById(params.other_id)
         if (!personRelationInstance.save(flush: true)) {
             render(view: "edit", model: [personRelationInstance: personRelationInstance])
             return

@@ -12,8 +12,10 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+                <%--
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+			    --%>
+            </ul>
 		</div>
 		<div id="list-personRelation" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
@@ -38,9 +40,9 @@
 				<g:each in="${personRelationInstanceList}" status="i" var="personRelationInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${personRelationInstance.id}">${fieldValue(bean: personRelationInstance, field: "person")}</g:link></td>
+						<td>${fieldValue(bean: personRelationInstance, field: "person")}</td>
 					
-						<td>${fieldValue(bean: personRelationInstance, field: "relationship")}</td>
+						<td><g:link action="show" id="${personRelationInstance.id}">${fieldValue(bean: personRelationInstance, field: "relationship")}</g:link></td>
 					
 						<td>${fieldValue(bean: personRelationInstance, field: "other")}</td>
 					
