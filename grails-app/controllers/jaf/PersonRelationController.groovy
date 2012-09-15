@@ -19,6 +19,7 @@ class PersonRelationController {
         [personRelationInstance: new PersonRelation(params)]
     }
 
+    // FIXME error messages when the other field is empty or invalid (same as person)
     def save = { PersonRelationSaveCommand prsc ->
         if (prsc.hasErrors()) {
             render(view: "create", model: [personRelationInstance: prsc])
@@ -70,6 +71,8 @@ class PersonRelationController {
     }
 
     def update() {
+//      load person in the same Hibernate request but not necessary
+//      def personRelationInstance = PersonRelation.findById(params.id,[fetch:[person:'eager']])
         def personRelationInstance = PersonRelation.get(params.id)
         if (!personRelationInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'personRelation.label', default: 'PersonRelation'), params.id])
@@ -96,9 +99,8 @@ class PersonRelationController {
         if (!params.other_id) {
             params.other_id = params.other_id_old
         }
-        // FIXME the next test doesn't work
-        if (params.other_id == personRelationInstance.person.id) {
-            // FIXME change the message property
+        if (Long.valueOf(params.other_id).equals(personRelationInstance.person.id)) {
+            // FIXME the message is about the null "other"
             personRelationInstance.errors.rejectValue("other", "default.optimistic.locking.failure",
                 [message(code: 'personRelation.label', default: 'PersonRelation')] as Object[],
                 "Relation must be with a different person")
@@ -136,11 +138,15 @@ class PersonRelationController {
     }
 }
 
+/**
+ * Command object to perform input validation (other_id differs from person.id)
+ */
 class PersonRelationSaveCommand {
 
     Person          person
     Relationship    relationship
     int             other_id
+    Person          other
     String          comment
 
     static constraints = {
@@ -152,6 +158,7 @@ class PersonRelationSaveCommand {
                 return other_id != prsc.person?.id
             }   
         )
+        other(nullable : true)
     }
 
 }
