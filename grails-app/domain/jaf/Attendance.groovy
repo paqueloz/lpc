@@ -25,15 +25,12 @@ class Attendance {
     static belongsTo = [camp: CampYear, person: Person]
     PersonStatus status
 
-    // CampType type // TODO ASK for the purpose
-
     static constraints = {
     }
 
     def String toString() {
         return person.toString() + " in " + camp.toString()
     }
+    
 }
-
-// enum CampType {}
 

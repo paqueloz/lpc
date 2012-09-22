@@ -32,7 +32,11 @@ class PersonController {
     }
 
     def show() {
-        def personInstance = Person.get(params.id)
+        def id = params.id
+        if (params.person_id) { // auto_complete
+            id = params.person_id
+        }
+        def personInstance = Person.get(id)
         if (!personInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), params.id])
             redirect(action: "list")
@@ -41,7 +45,7 @@ class PersonController {
 
         [personInstance: personInstance]
     }
-
+    
     def edit() {
         def personInstance = Person.get(params.id)
         if (!personInstance) {
