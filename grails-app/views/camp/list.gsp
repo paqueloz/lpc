@@ -6,10 +6,31 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'camp.label', default: 'Camp')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+        <gui:resources components="['toolTip','autoComplete']" />
 	</head>
 	<body>
 		<a href="#list-camp" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
+
+        <g:form action="show">
+        <table>
+            <tr>
+                <%--<td>${message(code: 'search.quick.access', default: 'Quick access')}</td><div style="width: 300px">
+                --%>
+                <td style="text-align: right"><g:submitButton
+                        name="show" class="show"
+                        value="${message(code: 'search.quick.access', default: 'Quick access')}" /></td>
+                <td><gui:autoComplete id="camp"
+                        value="${personRelationInstance?.other?.toStringForSearch()}"
+                        resultName="result" labelField="name"
+                        idField="id" controller="camp"
+                        action="autoCompleteJSON" minQueryLength='1'
+                        queryDelay='0.3' queryAppend="*"
+                        maxResultsDisplayed='20' /></td>
+            </tr>
+        </table>
+        </g:form>
+
+        <div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>

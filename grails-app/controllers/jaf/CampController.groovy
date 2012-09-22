@@ -1,6 +1,7 @@
 package jaf
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.converters.JSON
 
 class CampController {
 
@@ -31,7 +32,11 @@ class CampController {
     }
 
     def show() {
-        def campInstance = Camp.get(params.id)
+        def id = params.id
+        if (params.camp_id) { // auto_complete
+            id = params.camp_id
+        }
+        def campInstance = Camp.get(id)
         if (!campInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'camp.label', default: 'Camp'), params.id])
             redirect(action: "list")
@@ -99,5 +104,22 @@ class CampController {
 			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'camp.label', default: 'Camp'), params.id])
             redirect(action: "show", id: params.id)
         }
+    }
+    
+    /**
+     * Return a list of camps for the auto-complete search box
+     */
+    def autoCompleteJSON = {
+        if (!params.query) {
+            return;
+        }
+        def list = Camp.search("${params.query}*", [ reload : true ])     // default limit 10 results
+                                                                            // reload to concatenate birthDay and address
+        def jsonList = list.results.collect { Camp c -> [ id : c.id, name : c.toStringForSearch() ] }
+        if (list.total > 10) {
+            jsonList << [ id : "", name : "${list.total-10} not displayed" ]
+        }
+        def jsonResult = [ result : jsonList ]
+        render jsonResult as JSON
     }
 }

@@ -49,7 +49,11 @@ class Camp {
         except = 'years'
     }
 
-    def String toString() {
+    String toString() {
         return location
+    }
+    
+    String toStringForSearch() {
+        return "${location} ${city?:''} ${country?country.key:''}"
     }
 }
