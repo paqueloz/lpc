@@ -26,6 +26,9 @@ class Attendance {
     PersonStatus status
 
     static constraints = {
+        person()
+        camp()
+        status()
     }
 
     def String toString() {

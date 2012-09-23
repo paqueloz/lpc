@@ -22,7 +22,7 @@ package jaf
 
 class CampYear {
 
-    // TODO begin and end date
+    Date beginDate, endDate
     
     static belongsTo = [ camp : Camp ]
     
@@ -31,7 +31,11 @@ class CampYear {
     int year
 
     static constraints = {
+        camp()
         year(min: 1900)
+        beginDate(nullable: true)
+        endDate(nullable: true)
+        attendances()
     }
 
     def String toString() {
