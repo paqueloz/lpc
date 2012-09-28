@@ -21,7 +21,7 @@ class AttendanceController {
 
     def save() {
         def attendanceInstance = new Attendance(person : Person.findById(params.person_id),
-            camp : CampYear.findById(params.camp.id),
+            camp : CampYear.findById(params.camp?.id),
             status : params.status)
         if (!attendanceInstance.save(flush: true)) {
             render(view: "create", model: [attendanceInstance: attendanceInstance])

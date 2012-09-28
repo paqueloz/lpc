@@ -23,24 +23,27 @@ class PersonRelation {
     }
     
     String toString() {
-        "${relationship} of ${other}"
+        "${relationship} ${other}"
     }
     
     static Relationship opposite(Relationship r, Person p) {
         switch(r) {
-            case "mother":
-            case "father": 
-                return (p.getGender() == Gender.MALE) ? Relationship.son : Relationship.daughter 
-            case "son":
-            case "daughter":
-                return (p.getGender() == Gender.MALE) ? Relationship.father : Relationship.mother
+            case "motherOf":
+            case "fatherOf": 
+                return (p.getGender() == Gender.MALE) ? Relationship.sonOf : Relationship.daughterOf 
+            case "sonOf":
+            case "daughterOf":
+                return (p.getGender() == Gender.MALE) ? Relationship.fatherOf : Relationship.motherOf
+            case "livesWith":
+                return r
         }
     }
 }
 
-// e.g person is *mother* of other
+// e.g person is *motherOf* of other
+// better if the person referenced by livesWith has an address
 
 enum Relationship {
-    mother, father, son, daughter
+    motherOf, fatherOf, sonOf, daughterOf, livesWith
 }
 

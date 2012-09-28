@@ -6,14 +6,20 @@ import org.junit.*
 import grails.test.mixin.*
 
 @TestFor(AttendanceController)
-@Mock(Attendance)
+@Mock([Attendance,Person,CampYear])
 class AttendanceControllerTests {
 
 
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
-      //params["name"] = 'someValidName'
+      Person p = new Person(firstName:"Victor",lastName:"Hugo",gender:jaf.Gender.MALE,birthDay:new Date(),status:jaf.PersonStatus.CAmper).save()
+      assert p != null
+      params["person"] = p
+      CampYear c = new CampYear(year : 2000, camp : new Camp(location:"Venezia")).save()
+      assert c != null
+      params["camp"] = c
+      params["status"] = jaf.PersonStatus.CAmper
+      params["person_id"] = p.id
     }
 
     void testIndex() {
@@ -46,7 +52,7 @@ class AttendanceControllerTests {
         populateValidParams(params)
         controller.save()
 
-        assert response.redirectedUrl == '/attendance/show/1'
+        assert response.redirectedUrl == '/campYear/show/1'
         assert controller.flash.message != null
         assert Attendance.count() == 1
     }
@@ -105,7 +111,8 @@ class AttendanceControllerTests {
 
         // test invalid parameters in update
         params.id = attendance.id
-        //TODO: add invalid values to params object
+        // add invalid values to params object
+        params.camp = null
 
         controller.update()
 

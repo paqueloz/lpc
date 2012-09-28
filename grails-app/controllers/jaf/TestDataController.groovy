@@ -38,14 +38,18 @@ class TestDataController {
         sop.save(failOnError: true)
 
         PersonRelation pr = new PersonRelation(person : p,
-                relationship    : Relationship.father,
+                relationship    : Relationship.fatherOf,
                 other           : sop,
                 comment         : "maxi king").save(failOnError: true)
         pr = new PersonRelation(person : sop,
-                    relationship    : Relationship.daughter,
+                    relationship    : Relationship.daughterOf,
                     other           : p,
                     comment         : "so nice").save(failOnError: true)
-    
+        pr = new PersonRelation(person : sop,
+                relationship    : Relationship.livesWith,
+                other           : p,
+                comment         : "good").save(failOnError: true)
+
        Address a = new Address (   person  : p,
                 street1 : "11 ch du Lac",
                 zipCode : "1290",

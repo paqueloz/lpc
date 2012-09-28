@@ -19,29 +19,42 @@ class PersonRelationController {
         [personRelationInstance: new PersonRelation(params)]
     }
 
-    // FIXME error messages when the other field is empty or invalid (same as person)
-    def save = { PersonRelationSaveCommand prsc ->
-        if (prsc.hasErrors()) {
-            render(view: "create", model: [personRelationInstance: prsc])
-            return
+    /**
+     * Valid input:
+     * - person.id designates a person
+     * - other_id designates another person
+     * - relationship is not null
+     */
+    def save = {
+        Person aPerson;
+        if (params.person?.id) {
+            aPerson = Person.findById(params.person?.id)
         }
-        def pri = new PersonRelation( person : prsc.person,
-                            relationship    : prsc.relationship,
-                            other           : Person.findById(prsc.other_id),
-                            comment         : prsc.comment )
+        Person otherPerson;
+        if (params.other_id) {
+            if (Long.valueOf(params.other_id) != Long.valueOf(params.person?.id)) {
+                otherPerson = Person.findById(params.other_id)
+            }
+        }
+        def pri = new PersonRelation( person : aPerson,
+                            relationship    : params.relationship,
+                            other           : otherPerson,
+                            comment         : params.comment )
         if (!pri.save(flush: true)) {
             render(view: "create", model: [personRelationInstance: pri])
             return
         }
 
         // create the opposite
-        def opposite = new PersonRelation( person : pri.other,
-                relationship    : PersonRelation.opposite(pri.relationship,pri.other),
-                other           : pri.person,
-                comment         : pri.comment )
-        if (!opposite.save(flush: true)) {
-            render(view: "create", model: [personRelationInstance: pri])
-            return
+        if (pri.relationship != Relationship.livesWith) {
+            def opposite = new PersonRelation( person : pri.other,
+                    relationship    : PersonRelation.opposite(pri.relationship,pri.other),
+                    other           : pri.person,
+                    comment         : pri.comment )
+            if (!opposite.save(flush: true)) {
+                render(view: "create", model: [personRelationInstance: pri])
+                return
+            }
         }
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'personRelation.label', default: 'PersonRelation'), pri.id])
@@ -70,6 +83,11 @@ class PersonRelationController {
         [personRelationInstance: personRelationInstance]
     }
 
+    /**
+     * Expected input:
+     * - a valid PersonRelation id in params.id
+     * - params.other_id (takes precedence if user has modified the value) or params.other_id_old, different from person.id
+     */
     def update() {
 //      load person in the same Hibernate request but not necessary
 //      def personRelationInstance = PersonRelation.findById(params.id,[fetch:[person:'eager']])
@@ -99,16 +117,11 @@ class PersonRelationController {
         if (!params.other_id) {
             params.other_id = params.other_id_old
         }
-        if (Long.valueOf(params.other_id).equals(personRelationInstance.person.id)) {
-            // FIXME the message is about the null "other"
-            personRelationInstance.errors.rejectValue("other", "default.optimistic.locking.failure",
-                [message(code: 'personRelation.label', default: 'PersonRelation')] as Object[],
-                "Relation must be with a different person")
+        if (params.other_id && Long.valueOf(params.other_id) != Long.valueOf(params.person?.id)) {
+            personRelationInstance.other = Person.findById(params.other_id)
+        } else {
             personRelationInstance.other = null
-            render(view: "edit", model: [personRelationInstance: personRelationInstance])
-            return
         }
-        personRelationInstance.other = Person.findById(params.other_id)
         if (!personRelationInstance.save(flush: true)) {
             render(view: "edit", model: [personRelationInstance: personRelationInstance])
             return
@@ -140,25 +153,26 @@ class PersonRelationController {
 
 /**
  * Command object to perform input validation (other_id differs from person.id)
+ * Doesn't work very well; and potentially triggers a Grails bug
  */
-class PersonRelationSaveCommand {
-
-    Person          person
-    Relationship    relationship
-    int             other_id
-    Person          other
-    String          comment
-
-    static constraints = {
-        person(nullable : false)
-        relationship(nullable : false)
-        comment(nullable : true)
-        other_id(nullable : false,
-            validator : { other_id, prsc ->
-                return other_id != prsc.person?.id
-            }   
-        )
-        other(nullable : true)
-    }
-
-}
+//class PersonRelationSaveCommand {
+//
+//    Person          person
+//    Relationship    relationship
+//    String          other_id
+//    Person          other
+//    String          comment
+//
+//    static constraints = {
+//        person(nullable : false)
+//        relationship(nullable : false)
+//        comment(nullable : true)
+//        other_id(nullable : false,
+//            validator : { other_id, prsc ->
+//                return Long.valueOf(other_id) != prsc.person?.id
+//            }   
+//        )
+//        other(nullable : true)
+//    }
+//
+//}

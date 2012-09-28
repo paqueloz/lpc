@@ -6,14 +6,16 @@ import org.junit.*
 import grails.test.mixin.*
 
 @TestFor(CampYearController)
-@Mock(CampYear)
+@Mock([CampYear,Camp])
 class CampYearControllerTests {
 
 
     def populateValidParams(params) {
       assert params != null
-      // TODO: Populate valid properties like...
+      // Populate valid properties like...
       //params["name"] = 'someValidName'
+      params["camp"] = new Camp()
+      params["year"] = '2012'
     }
 
     void testIndex() {
@@ -105,7 +107,8 @@ class CampYearControllerTests {
 
         // test invalid parameters in update
         params.id = campYear.id
-        //TODO: add invalid values to params object
+        // add invalid values to params object
+        params.camp = null
 
         controller.update()
 
