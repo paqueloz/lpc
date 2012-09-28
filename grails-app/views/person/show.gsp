@@ -93,12 +93,12 @@
                             type="date" style="MEDIUM" /></span></li>
             </g:if>
 
-            <g:if test="${personInstance?.address}">
+            <g:if test="${address}">
                 <li class="fieldcontain"><span id="address-label"
                     class="property-label"><g:message
                             code="person.address.label"
                             default="Address" /></span> <%--<span class="property-value" aria-labelledby="address-label"><g:link controller="address" action="show" id="${personInstance?.address?.id}">${personInstance?.address?.encodeAsHTML()}</g:link></span>
-					        --%> <g:each in="${personInstance.address}" var="c">
+					        --%> <g:each in="${address}" var="c">
                         <span class="property-value"
                             aria-labelledby="address-label"><g:link
                                 controller="address" action="show"

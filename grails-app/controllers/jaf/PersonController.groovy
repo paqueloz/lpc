@@ -42,8 +42,19 @@ class PersonController {
             redirect(action: "list")
             return
         }
-
-        [personInstance: personInstance]
+        // use relationship to find address
+        def addr = personInstance.address;
+        if (!addr?.size()) {
+            for (relation in personInstance.relationships) {
+                if (relation.relationship != Relationship.livesWith) {
+                    continue
+                }
+                addr = relation.other.address
+                break
+            }
+        }
+        // view should use address and not the value inside personInstance
+        [personInstance: personInstance, address: addr]
     }
     
     def edit() {
