@@ -70,7 +70,8 @@ class BootStrap {
         }
         
         if (currentEnv == Environment.DEVELOPMENT) {
-            TestDataController.populateDb()
+            // Using a populated DB now. Call controller if needed...
+            // TestDataController.populateDb()
         }
         
     }

@@ -33,7 +33,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost/lpc"
             username = "root"
             password = "abcd"
@@ -48,7 +48,7 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "create-drop"
+            dbCreate = "validate"
             url = ""
             username = ""
             password = ""

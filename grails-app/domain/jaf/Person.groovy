@@ -44,6 +44,8 @@ class Person {
 
     Date dateCreated
     Date lastUpdated
+    
+    // String parentName // FIXME read-only
 
     static hasMany = [contacts: Contact, attendances: Attendance,
         languages: LanguageLevel, address: Address,
