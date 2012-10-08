@@ -1,9 +1,4 @@
-<!doctype html>
-<html>
-	<head>
-		<title>Grails Runtime Exception</title>
-		<meta name="layout" content="main">
-		<link rel="stylesheet" href="%{--
+%{--
   - This program is intended to help the Luethi-Peterson Camps association
   -     to help them store and manage their users
   -
@@ -23,7 +18,12 @@
   -     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   --}%
 
-${resource(dir: 'css', file: 'errors.css')}" type="text/css">
+<!doctype html>
+<html>
+	<head>
+		<title>Grails Runtime Exception</title>
+		<meta name="layout" content="main">
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'errors.css')}" type="text/css">
 	</head>
 	<body>
 		<g:renderException exception="${exception}" />

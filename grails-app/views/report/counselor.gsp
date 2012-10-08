@@ -17,17 +17,20 @@
   -     You should have received a copy of the GNU General Public License
   -     along with this program.  If not, see <http://www.gnu.org/licenses/>.
   --}%
-  
+
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>Report for younger</title>
+<title>Report for counselors</title>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'reportA.css')}" type="text/css">
 </head>
 <body>
-    <div class="title">
-        <h1>CAMPER APPLICATIONS - Younger</h1>
-        <h2>Campers less than 14 years old</h2>
+
+<h1>FIXME</h1>
+
+<%--    <div class="title">
+        <h1>CAMPER APPLICATIONS - COUNCELORS</h1>
+        <h2>Campers between 14 and 25 years old</h2>
         <h3>Sorted by Nationality, Sex, Given Name</h3>
     </div>
     <div class="stat">
@@ -96,6 +99,6 @@
             </table>
         </div>
     </g:each>
+--%>
 </body>
 </html>
-

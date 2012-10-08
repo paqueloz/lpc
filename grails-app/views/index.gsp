@@ -139,7 +139,7 @@
                 <li class="controller"><g:link controller="person"><g:message code="general.manage.people" default="Manage people" /></g:link></li>
                 <li class="controller"><g:link controller="camp"><g:message code="general.manage.camps" default="Manage camps" /></g:link></li>
                 <li class="controller"><g:link controller="search"><g:message code="general.search" default="Search" /></g:link></li>
-                <li class="controller"><g:link controller="report"><g:message code="general.reports" default="Reports" /></g:link></li>
+                <li class="controller"><g:link controller="report" action="index"><g:message code="general.reports" default="Create reports" /></g:link></li>
               </ul>
               <h2>Actions (development):</h2>
               <ul>

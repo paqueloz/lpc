@@ -21,13 +21,13 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>Report for younger</title>
+<title>Report for fourteen</title>
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'reportA.css')}" type="text/css">
 </head>
 <body>
     <div class="title">
-        <h1>CAMPER APPLICATIONS - Younger</h1>
-        <h2>Campers less than 14 years old</h2>
+        <h1>CAMPER APPLICATIONS - 14TH YEAR OLD</h1>
+        <h2>Campers 14 years old</h2>
         <h3>Sorted by Nationality, Sex, Given Name</h3>
     </div>
     <div class="stat">
