@@ -22,83 +22,73 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Report for counselors</title>
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'reportA.css')}" type="text/css">
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'reportB.css')}" type="text/css">
 </head>
 <body>
 
-<h1>FIXME</h1>
-
-<%--    <div class="title">
-        <h1>CAMPER APPLICATIONS - COUNCELORS</h1>
-        <h2>Campers between 14 and 25 years old</h2>
-        <h3>Sorted by Nationality, Sex, Given Name</h3>
+<div id="title">
+        <i><b>COUNSELOR APPLICATIONS</b> (sorted by experience, gender, age, nationality)</i>
     </div>
     <div class="stat">
         Number of records:
         ${result?.size()}
     </div>
     <p>
+    <hr class="hr2">
     <table class="tableCamper" width="95%">
         <tr>
-            <td class="cell" width="9%">NATIONALITY</td>
-            <td class="cell" width="3%">F=GIRLS<br>M=BOYS
-            </td>
-            <td class="cell"></td>
-            <td class="cell">FAMILY NAME</td>
-            <td class="cell">AGE IN CAMP</td>
-            <td class="cell">NEW?</td>
+            <td class="hdr">Sex&nbsp;&nbsp;Given name</td>
+            <td class="hdr">Family name</td>
+            <td class="hdr">Experience</td>
+            <td class="hdr" width="5%">Age</td>
+            <td class="hdr">Nationality</td>
+            <td class="hdr">Languages</td>
+            <td class="hdr">Preferences</td>
         </tr>
     </table>
+    <hr class="hr1" />
     <p>
+    <g:set var="lastGender" value="" />
     <g:each in="${result}" status="i" var="camper">
         <div class="divCamper">
             <p>
             <table class="tableCamper" width="95%">
+                <g:if test="${camper.gender!=lastGender}">
                 <tr>
-                    <td class="cellNationality" width="9%">
-                        ${camper.nationality}
+                    <td class="hdr">
+                    ${camper.gender} 
                     </td>
-                    <td class="cell" width="3%">
-                        ${camper.gender}
-                    </td>
-                    <td class="cellFirstName">
+                </tr>
+                <g:set var="lastGender" value="${camper.gender}" />
+                </g:if>
+            </table>
+            <table class="tableCamper" width="95%">
+                <tr>
+                    <td class="cell">
                         ${camper.firstName}
                     </td>
-                    <td class="cellLastName">
+                    <td class="cell">
                         ${camper.lastName}
                     </td>
                     <td class="cell">
+                        experience
+                    </td>
+                     <td class="cell" width="5%">
                         ${camper.age}
                     </td>
                     <td class="cell">
-                        ${camper.newToLpc?"New to LPC":"Not new"}
+                        ${camper.nationality}
                     </td>
-                </tr>
-                <tr>
-                    <td width="9%"></td>
-                    <td width="3%"></td>
-                    <td class="cellTag">Preferences:</td>
-                    <td class="cellPref" colspan="3">
-                        ${camper.preferences}
+                     <td class="cell">
+                        Languages
                     </td>
-                </tr>
-                <tr>
-                    <td width="9%"></td>
-                    <td width="3%"></td>
-                    <td class="cellTag">Camp:</td>
                     <td class="cell">
-                        ${camper.location}
-                    </td>
-                    <td class="cellYear">
-                        ${camper.year}
-                    </td>
-                    <td class="cellStatusA">
-                        ${camper.statusA}
-                    </td>
+                        ${camper.preferences}
+                    </td>               
                 </tr>
             </table>
+            <hr class="hr3" />
         </div>
     </g:each>
---%>
 </body>
 </html>

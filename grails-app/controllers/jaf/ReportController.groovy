@@ -212,8 +212,8 @@ class ReportController {
                 left join attendance a on a.person_id = p.id
                 left join camp_year cy on a.camp_id = cy.id
                 left join camp c on c.id = cy.camp_id
-                HAVING (p.Status='COuncellor')
-                ORDER BY nationality, p.gender, p.first_name, cy.year DESC, Age;""") {
+                where gender!='UNdefined'
+                ORDER BY nationality, p.first_name, cy.year DESC, Age limit 20;""") {
                     def rec = [ nationality : it.nationality,
                         gender : "",
                         firstName : it.first_name,
