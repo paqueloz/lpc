@@ -141,11 +141,13 @@
                 <li class="controller"><g:link controller="search"><g:message code="general.search" default="Search" /></g:link></li>
                 <li class="controller"><g:link controller="report" action="index"><g:message code="general.reports" default="Create reports" /></g:link></li>
               </ul>
-              <h2>Actions (development):</h2>
+              <h2>Actions (admin):</h2>
               <ul>
                 <li class="controller"><g:link controller="testData">Generate test data</g:link></li>
-                <li class="controller"><g:link controller="address">Manage addresses</g:link></li>
-                <li class="controller"><g:link controller="personRelation">Manage relations</g:link></li>
+                <li class="controller"><g:link controller="secUser">Manage users</g:link></li>
+                <%--
+                TODO hide for regular users
+                --%>
               </ul>
             </div>
 		</div>

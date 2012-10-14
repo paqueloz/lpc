@@ -39,11 +39,13 @@ class SecUser {
 	static mapping = {
 		password column: '`password`'
 	}
-
+    
 	Set<SecRole> getAuthorities() {
 		SecUserSecRole.findAllBySecUser(this).collect { it.secRole } as Set
 	}
 
+    // FIXME delete the Authorities before deleting the SecUser
+    
 	def beforeInsert() {
 		encodePassword()
 	}
@@ -57,4 +59,9 @@ class SecUser {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}
+    
+    String toString() {
+        username
+    }
+    
 }

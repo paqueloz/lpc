@@ -22,5 +22,6 @@ package jaf
 
 class SecUserSecRoleController {
 
-    def scaffold = SecUserSecRole
+    // def scaffold = true
+    
 }

@@ -31,4 +31,8 @@ class SecRole {
 	static constraints = {
 		authority blank: false, unique: true
 	}
+    
+    String toString() {
+        authority
+    }
 }

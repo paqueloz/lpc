@@ -22,6 +22,6 @@ package jaf
 
 class SecRoleController {
 
-    def SecRole
+    // def scaffold = true
 
 }
