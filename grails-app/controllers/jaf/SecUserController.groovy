@@ -25,6 +25,7 @@ class SecUserController {
             render(view: "create", model: [secUserInstance: secUserInstance])
             return
         }
+        SecUserSecRole.create(secUserInstance, SecRole.findByAuthority('ROLE_USER'))
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'secUser.label', default: 'SecUser'), secUserInstance.id])
         redirect(action: "show", id: secUserInstance.id)
