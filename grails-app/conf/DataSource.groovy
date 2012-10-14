@@ -33,7 +33,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost/lpc"
             username = "root"
             password = "abcd"
@@ -48,7 +48,7 @@ environments {
     }
     production {
         dataSource {
-            dbCreate = "validate"
+            dbCreate = "validate" // only safe option: sysadmin manages the DB
             url = ""
             username = ""
             password = ""

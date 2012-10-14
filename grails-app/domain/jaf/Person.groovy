@@ -45,7 +45,7 @@ class Person {
     Date dateCreated
     Date lastUpdated
     
-    // String parentName // FIXME read-only
+    String parentName
 
     static hasMany = [contacts: Contact, attendances: Attendance,
         languages: LanguageLevel, address: Address,
@@ -63,6 +63,7 @@ class Person {
         nationalities()
         languages()
         relationships()
+        parentName(nullable: true)
         attendances()
         appliedForNextYear()
         newToLpc()

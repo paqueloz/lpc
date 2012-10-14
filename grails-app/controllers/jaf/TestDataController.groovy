@@ -26,6 +26,7 @@ class TestDataController {
                 birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1971-03-30"), // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
                 gender      : Gender.MALE,
                 status      : PersonStatus.UNdefined,
+                parentName  : "Michel Queloz",
                 )
         p.save(failOnError: true)
 

@@ -168,6 +168,18 @@
                     </g:each></li>
             </g:if>
 
+            <g:if test="${personInstance?.parentName}">
+                <li class="fieldcontain"><span
+                    id="parentName-label" class="property-label"><g:message
+                            code="person.parentName.label"
+                            default="Parent Name" /></span> <span
+                    class="property-value"
+                    aria-labelledby="parentName-label"><g:fieldValue
+                            bean="${personInstance}" field="parentName" /></span>
+
+                </li>
+            </g:if>
+
             <g:if test="${personInstance?.attendances}">
                 <li class="fieldcontain"><span
                     id="attendances-label" class="property-label"><g:message
