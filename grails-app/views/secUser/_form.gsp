@@ -50,3 +50,14 @@
 	<g:checkBox name="passwordExpired" value="${secUserInstance?.passwordExpired}" />
 </div>
 
+<g:if test="${roles}">
+<g:each in="${roles.entrySet()}" var="r">
+<div class="fieldcontain ${hasErrors(bean: secUserInstance, field: 'roles', 'error')} ">
+    <label for="roles">
+        ${r.key}
+    </label>
+    <g:checkBox name="${r.key}" value="${r.value}" />
+</div>
+</g:each>
+</g:if>
+

@@ -76,8 +76,17 @@
 					
 				</li>
 				</g:if>
-			
-			</ol>
+
+                <li class="fieldcontain"><span id="roles-label" class="property-label">
+                    <g:message code="secUser.roles.label" default="Roles" />
+                    </span>
+                    <g:each in="${roles?.entrySet()}" var="r">
+                        <span class="property-value" aria-labelledby="role-label"> ${r.key} : <g:formatBoolean boolean="${r.value}" />
+                        </span> 
+                    </g:each>
+                </li>
+
+        </ol>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${secUserInstance?.id}" />

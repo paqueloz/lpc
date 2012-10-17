@@ -56,11 +56,12 @@ class BootStrap {
         def currentEnv = Environment.current
         
         /*
-         * If there is no "user" or "admin" role, create them
+         * Make sure the default roles exist
          */
+        def readerRole = SecRole.findByAuthority('ROLE_READER') ?: new SecRole(authority: 'ROLE_READER').save(failOnError: true)
         def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
         def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
-
+        
         /*
          * If there is no "admin", create it
          */
@@ -73,8 +74,9 @@ class BootStrap {
          * Make sure that "admin" has the admin role
          */
         if (!adminUser.authorities.contains(adminRole)) {
-            SecUserSecRole.create adminUser, adminRole
+            SecUserSecRole.create adminUser, readerRole
             SecUserSecRole.create adminUser, userRole
+            SecUserSecRole.create adminUser, adminRole
         }
         
         if (currentEnv == Environment.DEVELOPMENT) {

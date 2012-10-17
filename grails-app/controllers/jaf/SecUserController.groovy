@@ -1,5 +1,6 @@
 package jaf
 
+import java.util.HashMap.Entry
 import org.springframework.dao.DataIntegrityViolationException
 
 class SecUserController {
@@ -25,7 +26,7 @@ class SecUserController {
             render(view: "create", model: [secUserInstance: secUserInstance])
             return
         }
-        SecUserSecRole.create(secUserInstance, SecRole.findByAuthority('ROLE_USER'))
+        // SecUserSecRole.create(secUserInstance, SecRole.findByAuthority('ROLE_USER'))
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'secUser.label', default: 'SecUser'), secUserInstance.id])
         redirect(action: "show", id: secUserInstance.id)
@@ -39,7 +40,11 @@ class SecUserController {
             return
         }
 
-        [secUserInstance: secUserInstance]
+        def roleMap = [:] // map will contain all roles and a boolean value
+        SecRole.findAll().each { SecRole s -> roleMap[(s.getAuthority())] = false }
+        secUserInstance.getAuthorities().each { SecRole s -> roleMap[(s.getAuthority())] = true }
+
+        [secUserInstance: secUserInstance, roles: roleMap]
     }
 
     def edit() {
@@ -50,7 +55,11 @@ class SecUserController {
             return
         }
 
-        [secUserInstance: secUserInstance]
+        def roleMap = [:] // map will contain all roles and a boolean value
+        SecRole.findAll().each { SecRole s -> roleMap[(s.getAuthority())] = false }
+        secUserInstance.getAuthorities().each { SecRole s -> roleMap[(s.getAuthority())] = true }
+
+        [secUserInstance: secUserInstance, roles: roleMap]
     }
 
     def update() {
@@ -74,6 +83,16 @@ class SecUserController {
 
         secUserInstance.properties = params
 
+        // manage roles, find all params like _ROLE_ and apply the changes
+        SecUserSecRole.removeAll(secUserInstance)
+        params.entrySet().each { Entry e ->
+            String current = (String)e.key 
+            if (current.startsWith("ROLE_")) {
+                SecRole role = SecRole.findByAuthority(current)
+                if (e.value == "on") SecUserSecRole.create(secUserInstance,role,true)
+            }
+        }
+        
         if (!secUserInstance.save(flush: true)) {
             render(view: "edit", model: [secUserInstance: secUserInstance])
             return
