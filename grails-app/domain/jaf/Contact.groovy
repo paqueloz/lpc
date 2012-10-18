@@ -52,7 +52,7 @@ enum ContactType {
 }
 
 enum ContactMode {
-    HOME, WORK
+    HOME, WORK, UNdefined
 }
 
 

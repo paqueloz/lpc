@@ -46,6 +46,9 @@
 
     <g:if test="${haveQuery && !haveResults && !parseException}">
       <p>Nothing matched your query - <strong>${params.q}</strong></p>
+      <p>Suggestion: add a * at the end of your query to match more words.</p>
+      
+      <%--
       <g:if test="${!searchResult?.suggestedQuery}">
         <p>Suggestions:</p>
         <ul>
@@ -56,7 +59,10 @@
           </li>
         </ul>
       </g:if>
+      --%>
+      
     </g:if>
+    
 
     <g:if test="${searchResult?.suggestedQuery}">
       <p>Did you mean <g:link controller="search" action="index" params="[q: searchResult.suggestedQuery]">${StringQueryUtils.highlightTermDiffs(params.q.trim(), searchResult.suggestedQuery)}</g:link>?</p>
