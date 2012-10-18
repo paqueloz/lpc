@@ -48,7 +48,7 @@ class Contact {
 }
 
 enum ContactType {
-    PHONE, FAX, EMAIL, MOBILE
+    PHONE, FAX, EMAIL, MOBILE, UNdefined
 }
 
 enum ContactMode {
