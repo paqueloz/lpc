@@ -35,7 +35,7 @@
         ${result?.size()}
     </div>
     <p>
-    <table class="tableCamper" width="95%">
+    <table class="tableCamper" width="97%">
         <tr>
             <td class="cell" width="9%">NATIONALITY</td>
             <td class="cell" width="3%">F=GIRLS<br>M=BOYS
@@ -50,7 +50,7 @@
     <g:each in="${result}" status="i" var="camper">
         <div class="divCamper">
             <p>
-            <table class="tableCamper" width="95%">
+            <table class="tableCamper" width="97%">
                 <tr>
                     <td class="cellNationality" width="9%">
                         ${camper.nationality}

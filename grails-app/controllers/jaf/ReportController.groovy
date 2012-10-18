@@ -30,8 +30,9 @@ class ReportController {
                 grailsApplication.config.dataSource.driverClassName)
 
         def recList = []
+
+        java.math.MathContext mc = new java.math.MathContext(3)
         
-        // FIXME change age range and filter on appliedForNextYear
         sql.eachRow("""SELECT
                 (
                 select group_concat(r.short_key) from
@@ -46,7 +47,8 @@ class ReportController {
                 left join attendance a on a.person_id = p.id
                 left join camp_year cy on a.camp_id = cy.id
                 left join camp c on c.id = cy.camp_id
-                HAVING (Age < 14)
+                where applied_for_next_year = 1
+                HAVING (Age < 13.5)
                 ORDER BY nationality, p.gender, p.first_name, cy.year DESC, Age;""") {
                     def rec = [ nationality : it.nationality,
                         gender : "",
@@ -58,7 +60,7 @@ class ReportController {
                         location : it.location,
                         year : it.year,
                         statusA : it.status,
-                        age : it.Age ]
+                        age : it.Age.round(mc) ]
                     switch (it.gender) {
                         case "MALE": rec.gender = "M"; break;
                         case "FEMALE": rec.gender = "F";
@@ -87,7 +89,8 @@ class ReportController {
 
         def recList = []
         
-        // FIXME change age range and filter on appliedForNextYear
+        java.math.MathContext mc = new java.math.MathContext(3)
+        
         sql.eachRow("""SELECT
                 (
                 select group_concat(r.short_key) from
@@ -102,7 +105,8 @@ class ReportController {
                 left join attendance a on a.person_id = p.id
                 left join camp_year cy on a.camp_id = cy.id
                 left join camp c on c.id = cy.camp_id
-                HAVING (Age >= 14 and Age < 15)
+                where applied_for_next_year = 1
+                HAVING (Age >= 13.5 and Age <= 14.5)
                 ORDER BY nationality, p.gender, p.first_name, cy.year DESC, Age;""") {
                     def rec = [ nationality : it.nationality,
                         gender : "",
@@ -114,7 +118,7 @@ class ReportController {
                         location : it.location,
                         year : it.year,
                         statusA : it.status,
-                        age : it.Age ]
+                        age : it.Age.round(mc) ]
                     switch (it.gender) {
                         case "MALE": rec.gender = "M"; break;
                         case "FEMALE": rec.gender = "F";
@@ -142,7 +146,8 @@ class ReportController {
 
         def recList = []
         
-        // FIXME change age range and filter on appliedForNextYear
+        java.math.MathContext mc = new java.math.MathContext(3)
+        
         sql.eachRow("""SELECT
                 (
                 select group_concat(r.short_key) from
@@ -157,7 +162,8 @@ class ReportController {
                 left join attendance a on a.person_id = p.id
                 left join camp_year cy on a.camp_id = cy.id
                 left join camp c on c.id = cy.camp_id
-                HAVING (Age > 15 and Age <25)
+                where applied_for_next_year = 1
+                and p.status = 'CAmper' HAVING (Age > 14.5)
                 ORDER BY nationality, p.gender, p.first_name, cy.year DESC, Age;""") {
                     def rec = [ nationality : it.nationality,
                         gender : "",
@@ -169,7 +175,7 @@ class ReportController {
                         location : it.location,
                         year : it.year,
                         statusA : it.status,
-                        age : it.Age ]
+                        age : it.Age.round(mc) ]
                     switch (it.gender) {
                         case "MALE": rec.gender = "M"; break;
                         case "FEMALE": rec.gender = "F";
@@ -197,23 +203,26 @@ class ReportController {
 
         def recList = []
         
-        // FIXME change age range and filter on appliedForNextYear
+        // FIXME experience?
+        java.math.MathContext mc = new java.math.MathContext(3)
         sql.eachRow("""SELECT
-                (
-                select group_concat(r.short_key) from
-                nationality nat
-                left join region r on r.id = nat.country_id
-                where person_id=p.id
-                ) as nationality,
-                p.gender, p.first_name, p.last_name, p.new_to_lpc, p.preferences, p.Status,
-                c.location, cy.year, a.status,
-                DATEDIFF(curdate(), p.birth_day)/365.25 as Age
-                FROM person p
-                left join attendance a on a.person_id = p.id
-                left join camp_year cy on a.camp_id = cy.id
-                left join camp c on c.id = cy.camp_id
-                where gender!='UNdefined'
-                ORDER BY nationality, p.first_name, cy.year DESC, Age limit 20;""") {
+                        (
+                        select group_concat(r.short_key) from nationality nat
+                        left join region r on r.id = nat.country_id
+                        where person_id = p.id
+                        ) as nationality,
+                        p.gender, p.first_name, p.last_name, p.new_to_lpc, p.preferences, p.Status,
+                        (
+                        select group_concat(l.language) from language_level l
+                        where l.person_id = p.id
+                        ) as languages,
+                        DATEDIFF(curdate(), p.birth_day)/365.25 as Age,
+                        p.id
+                        FROM person p
+                        where applied_for_next_year = 1
+                        and p.Status not like 'CAmper'
+                        HAVING (Age > 14.5)
+                        ORDER BY gender, Age, nationality;""") {
                     def rec = [ nationality : it.nationality,
                         gender : "",
                         firstName : it.first_name,
@@ -221,10 +230,8 @@ class ReportController {
                         newToLpc : it.new_to_lpc,
                         preferences : it.preferences,
                         status : it.Status,
-                        location : it.location,
-                        year : it.year,
-                        statusA : it.status,
-                        age : it.Age ]
+                        languages : it.languages,
+                        age : it.Age.round(mc) ]
                     switch (it.gender) {
                         case "MALE": rec.gender = "M"; break;
                         case "FEMALE": rec.gender = "F";

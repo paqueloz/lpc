@@ -35,13 +35,13 @@
     </div>
     <p>
     <hr class="hr2">
-    <table class="tableCamper" width="95%">
+    <table class="tableCamper" width="97%">
         <tr>
-            <td class="hdr">Sex&nbsp;&nbsp;Given name</td>
-            <td class="hdr">Family name</td>
-            <td class="hdr">Experience</td>
-            <td class="hdr" width="5%">Age</td>
-            <td class="hdr">Nationality</td>
+            <td class="hdr" width="15%">Sex&nbsp;&nbsp;Given name</td>
+            <td class="hdr" width="15%">Family name</td>
+            <td class="hdr" width="10%">Experience</td>
+            <td class="hdr" width="6%">Age</td>
+            <td class="hdr" width="9%">Nationality</td>
             <td class="hdr">Languages</td>
             <td class="hdr">Preferences</td>
         </tr>
@@ -52,7 +52,7 @@
     <g:each in="${result}" status="i" var="camper">
         <div class="divCamper">
             <p>
-            <table class="tableCamper" width="95%">
+            <table class="tableCamper" width="97%">
                 <g:if test="${camper.gender!=lastGender}">
                 <tr>
                     <td class="hdr">
@@ -62,25 +62,25 @@
                 <g:set var="lastGender" value="${camper.gender}" />
                 </g:if>
             </table>
-            <table class="tableCamper" width="95%">
+            <table class="tableCamper" width="97%">
                 <tr>
-                    <td class="cell">
+                    <td class="cell" width="15%">
                         ${camper.firstName}
                     </td>
-                    <td class="cell">
+                    <td class="cell" width="15%">
                         ${camper.lastName}
                     </td>
-                    <td class="cell">
-                        experience
+                    <td class="cell" width="10%">
+                        exp??
                     </td>
-                     <td class="cell" width="5%">
+                     <td class="cell" width="6%">
                         ${camper.age}
                     </td>
-                    <td class="cell">
+                    <td class="cell" width="9%">
                         ${camper.nationality}
                     </td>
                      <td class="cell">
-                        Languages
+                        ${camper.languages}
                     </td>
                     <td class="cell">
                         ${camper.preferences}
