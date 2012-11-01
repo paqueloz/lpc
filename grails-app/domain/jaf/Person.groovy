@@ -46,6 +46,8 @@ class Person {
     Date lastUpdated
     
     String parentName
+    
+    SortedSet attendances
 
     static hasMany = [contacts: Contact, attendances: Attendance,
         languages: LanguageLevel, address: Address,

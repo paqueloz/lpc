@@ -20,6 +20,8 @@
 
 package jaf
 
+import java.util.SortedSet;
+
 import grails.plugins.countries.Country
 
 class Camp {
@@ -31,6 +33,7 @@ class Camp {
     String city
     Country country
     Contact contact     // for phone number
+    SortedSet years    
     static hasMany = [ years : CampYear, staff : Staff ]
     
     // TODO add picture

@@ -20,12 +20,15 @@
 
 package jaf
 
-class CampYear {
+import java.util.SortedSet;
+
+class CampYear implements Comparable {
 
     Date beginDate, endDate
     
     static belongsTo = [ camp : Camp ]
     
+    SortedSet attendances
     static hasMany = [ attendances : Attendance ]
     
     int year
@@ -40,5 +43,9 @@ class CampYear {
 
     def String toString() {
         return "$camp ($year)"
+    }
+    
+    int compareTo(obj) {
+        year - obj.year
     }
 }

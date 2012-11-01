@@ -20,7 +20,8 @@
 
 package jaf
 
-class Attendance {
+// Comparable to sort in the Person view
+class Attendance implements Comparable {
 
     static belongsTo = [camp: CampYear, person: Person]
     PersonStatus status
@@ -35,5 +36,12 @@ class Attendance {
         return person.toString() + " in " + camp.toString()
     }
     
+    int compareTo(obj) {
+        int compareYear = camp.compareTo(obj.camp)
+        if (compareYear != 0) {
+            return compareYear
+        }
+        person.lastName.compareTo(obj.person.lastName)
+    }
 }
 
