@@ -281,7 +281,8 @@ select[multiple] {
 }
 
 textarea {
-	width: 250px;
+    /* control width with columns as in view/person/_form.gsp
+	/* width: 250px; */
 	height: 150px;
 	overflow: auto; /* IE always renders vertical scrollbar without this */
 	vertical-align: top;

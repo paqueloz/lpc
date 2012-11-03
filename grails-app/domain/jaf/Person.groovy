@@ -69,7 +69,7 @@ class Person {
         attendances()
         appliedForNextYear()
         newToLpc()
-        preferences(nullable: true)
+        preferences(nullable: true, size: 0..512)
         status()
         dateCreated()
         lastUpdated()

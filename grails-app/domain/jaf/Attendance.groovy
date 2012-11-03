@@ -42,6 +42,8 @@ class Attendance implements Comparable {
             return compareYear
         }
         person.lastName.compareTo(obj.person.lastName)
+        // FIXME status 1) director > co-dir > dir in training 2) counselor 3) campers 4) invited
+        // FIXME start of CC vient après 
     }
 }
 

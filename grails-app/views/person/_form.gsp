@@ -225,7 +225,7 @@
 		<g:message code="person.preferences.label" default="Preferences" />
 		
 	</label>
-	<g:textField name="preferences" value="${personInstance?.preferences}"/>
+	<g:textArea name="preferences" cols="60" rows="5" maxlength="512" value="${personInstance?.preferences}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'status', 'error')} required">
