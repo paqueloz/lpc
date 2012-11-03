@@ -39,11 +39,11 @@ class TestDataController {
         sop.save(failOnError: true)
 
         PersonRelation pr = new PersonRelation(person : p,
-                relationship    : Relationship.fatherOf,
+                relationship    : Relationship.parentOf,
                 other           : sop,
                 comment         : "maxi king").save(failOnError: true)
         pr = new PersonRelation(person : sop,
-                    relationship    : Relationship.daughterOf,
+                    relationship    : Relationship.childOf,
                     other           : p,
                     comment         : "so nice").save(failOnError: true)
         pr = new PersonRelation(person : sop,

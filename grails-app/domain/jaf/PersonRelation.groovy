@@ -28,22 +28,20 @@ class PersonRelation {
     
     static Relationship opposite(Relationship r, Person p) {
         switch(r) {
-            case "motherOf":
-            case "fatherOf": 
-                return (p.getGender() == Gender.MALE) ? Relationship.sonOf : Relationship.daughterOf 
-            case "sonOf":
-            case "daughterOf":
-                return (p.getGender() == Gender.MALE) ? Relationship.fatherOf : Relationship.motherOf
+            case "parentOf":
+                return Relationship.childOf 
+            case "childOf":
+                return Relationship.parentOf
             case "livesWith":
                 return r
         }
     }
 }
 
-// e.g person is *motherOf* of other
+// e.g person is *parentOf* of other
 // better if the person referenced by livesWith has an address
 
 enum Relationship {
-    motherOf, fatherOf, sonOf, daughterOf, livesWith
+    parentOf, childOf, livesWith
 }
 

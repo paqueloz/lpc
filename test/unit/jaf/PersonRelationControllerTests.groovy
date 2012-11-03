@@ -15,7 +15,7 @@ class PersonRelationControllerTests {
       Person p = new Person(firstName:"Paul",lastName:"Henri",gender:jaf.Gender.MALE,birthDay:new Date(),status:jaf.PersonStatus.CAmper).save()
       assert p != null
       params.person = p
-      params.relationship = 'fatherOf'
+      params.relationship = 'parentOf'
       p = new Person(firstName:"Jean",lastName:"François",gender:jaf.Gender.MALE,birthDay:new Date(),status:jaf.PersonStatus.CAmper).save()
       params.other = p
       params.other_id = p.id
