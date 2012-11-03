@@ -190,7 +190,7 @@
                             aria-labelledby="attendances-label"><g:link
                                 controller="attendance" action="show"
                                 id="${a.id}">
-                                ${a?.encodeAsHTML()}
+                                ${a?.campAndStatus().encodeAsHTML()}
                             </g:link></span>
                     </g:each></li>
             </g:if>

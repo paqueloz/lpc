@@ -24,7 +24,7 @@ import java.util.SortedSet;
 
 import grails.plugins.countries.Country
 
-class Camp {
+class Camp implements Comparable {
 
     String location     // name of the house
     String street1
@@ -58,5 +58,16 @@ class Camp {
     
     String toStringForSearch() {
         return "${location} ${city?:''} ${country?country.key:''}"
+    }
+    
+    int compareTo(obj) {
+        if (location!="StartOfCC" && obj.location!="StartOfCC") {
+            return 0
+        } else if (location == obj.location) {
+            return 0
+        } else if (location == "StartOfCC") {
+            return 1
+        }
+        return -1
     }
 }

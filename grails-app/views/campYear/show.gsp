@@ -65,7 +65,9 @@
 					<span id="attendances-label" class="property-label"><g:message code="campYear.attendances.label" default="Attendances" /></span>
 					
 						<g:each in="${campYearInstance.attendances}" var="a">
-						<span class="property-value" aria-labelledby="attendances-label"><g:link controller="attendance" action="show" id="${a.id}">${a?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="attendances-label"><g:link controller="attendance" action="show" id="${a.id}">
+                            ${a?.nameAndStatus().encodeAsHTML()}
+                        </g:link></span>
 						</g:each>
 					
 				</li>

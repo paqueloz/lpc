@@ -47,7 +47,7 @@
             <g:each in="${campYearInstance?.attendances?}" var="a">
                 <li><g:link controller="attendance" action="show"
                         id="${a.id}">
-                        ${a?.encodeAsHTML()}
+                        ${a?.nameAndStatus().encodeAsHTML()}
                     </g:link></li>
             </g:each>
             <li class="add"><g:link controller="attendance"

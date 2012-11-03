@@ -192,14 +192,14 @@
             <g:each in="${personInstance?.attendances?}" var="a">
                 <li><g:link controller="attendance" action="show"
                         id="${a.id}">
-                        ${a?.encodeAsHTML()}
+                        ${a?.campAndStatus().encodeAsHTML()}
                     </g:link></li>
             </g:each>
-            <li class="add"><g:link controller="attendance"
+            <!-- <li class="add"><g:link controller="attendance"
                     action="create"
                     params="['person.id': personInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'attendance.label', default: 'Attendance')])}
-                </g:link></li>
+                 </g:link></li> -->
         </ul>
     </div>
 </g:if>

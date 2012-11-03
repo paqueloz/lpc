@@ -46,6 +46,12 @@ class CampYear implements Comparable {
     }
     
     int compareTo(obj) {
+        // some camps come after others
+        int comparison = camp.compareTo(obj.camp)
+        if (comparison) {
+            return comparison
+        }
+        // use year if there is no order in camps
         year - obj.year
     }
 }

@@ -32,18 +32,44 @@ class Attendance implements Comparable {
         status()
     }
 
-    def String toString() {
+    String toString() {
         return person.toString() + " in " + camp.toString()
     }
     
+    String nameAndStatus() {
+        return "${person} - ${status}"
+    }
+    
+    String campAndStatus() {
+        return "${camp} - ${status}"
+    }
+    
     int compareTo(obj) {
+        
         int compareYear = camp.compareTo(obj.camp)
         if (compareYear != 0) {
             return compareYear
         }
+        int cmpStat = compareStatus(obj)
+        if (cmpStat != 0) {
+            return cmpStat
+        }
         person.lastName.compareTo(obj.person.lastName)
-        // FIXME status 1) director > co-dir > dir in training 2) counselor 3) campers 4) invited
-        // FIXME start of CC vient après 
+    }
+    
+    int compareStatus(obj) {
+        return rank(status) - rank(obj.status)
+    }
+    
+    int rank(PersonStatus s) {
+        switch (s) {
+            case PersonStatus.Director : return 1
+            case PersonStatus.CoDirector : return 2
+            case PersonStatus.DITraining : return 3
+            case PersonStatus.COuncellor : return 4
+            case PersonStatus.CAmper : return 5
+        }
+        return 6
     }
 }
 
