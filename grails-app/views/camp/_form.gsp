@@ -56,6 +56,7 @@
 		<g:message code="camp.contact.label" default="Contact" />
 		
 	</label>
+<%-- FIXME CANNOT LEAVE LIKE THIS --%>    
 	<g:select id="contact" name="contact.id" from="${jaf.Contact.list()}" optionKey="id" value="${campInstance?.contact?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 

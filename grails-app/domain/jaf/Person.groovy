@@ -49,7 +49,7 @@ class Person {
     
     SortedSet attendances
 
-    static hasMany = [contacts: Contact, attendances: Attendance,
+    static hasMany = [contacts: PersonContact, attendances: Attendance,
         languages: LanguageLevel, address: Address,
         nationalities: Nationality, involvements: Staff,
         relationships: PersonRelation]

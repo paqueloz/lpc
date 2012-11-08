@@ -102,7 +102,7 @@
                         ${c?.encodeAsHTML()}
                     </g:link></li>
             </g:each>
-            <li class="add"><g:link controller="contact"
+            <li class="add"><g:link controller="personContact"
                     action="create"
                     params="['person.id': personInstance?.id]">
                     ${message(code: 'default.add.label', args: [message(code: 'contact.label', default: 'Contact')])}

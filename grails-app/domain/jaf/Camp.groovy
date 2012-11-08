@@ -32,9 +32,8 @@ class Camp implements Comparable {
     String zipCode
     String city
     Country country
-    Contact contact     // for phone number
     SortedSet years    
-    static hasMany = [ years : CampYear, staff : Staff ]
+    static hasMany = [ years : CampYear, staff : Staff, contacts : CampContact ]
     
     // TODO add picture
 

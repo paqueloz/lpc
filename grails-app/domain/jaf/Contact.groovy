@@ -24,8 +24,6 @@ import org.apache.commons.validator.EmailValidator
 
 class Contact {
 
-    static belongsTo = [person:Person]
-
     Date dateCreated
     Date lastUpdated
 

@@ -60,28 +60,28 @@ class TestDataController {
                 )
         a.save(failOnError: true)
 
-        Contact c = new Contact (   person  : p,
+        PersonContact c = new PersonContact (   person  : p,
                 type    : ContactType.PHONE,
                 mode    : ContactMode.HOME,
                 value   : "+41 22 755 15 80",
                 active  : true,
                 )
         c.save(failOnError: true)
-        c = new Contact (           person  : p,
+        c = new PersonContact (           person  : p,
                 type    : ContactType.EMAIL,
                 mode    : ContactMode.HOME,
                 value   : "paqueloz@gmail.com",
                 active  : true,
                 )
         c.save(failOnError: true)
-        c = new Contact (           person  : p,
+        c = new PersonContact (           person  : p,
                 type    : ContactType.MOBILE,
                 mode    : ContactMode.HOME,
                 value   : "+41 79 768 30 17",
                 active  : true,
                 )
         c.save(failOnError: true)
-        c = new Contact (           person  : p,
+        c = new PersonContact (           person  : p,
                 type    : ContactType.EMAIL,
                 mode    : ContactMode.WORK,
                 value   : "queloz@rembo.com",
