@@ -51,14 +51,28 @@
     <country:select name="country.id" value="${campInstance?.country?.id}" noSelection="['':'select please:']"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: campInstance, field: 'contact', 'error')} ">
-	<label for="contact">
-		<g:message code="camp.contact.label" default="Contact" />
-		
-	</label>
-<%-- FIXME CANNOT LEAVE LIKE THIS --%>    
-	<g:select id="contact" name="contact.id" from="${jaf.Contact.list()}" optionKey="id" value="${campInstance?.contact?.id}" class="many-to-one" noSelection="['null': '']"/>
-</div>
+<%-- Contacts: hide this area until Camp is in the database --%>
+<g:if test="${campInstance?.id}">
+    <div
+        class="fieldcontain ${hasErrors(bean: campInstance, field: 'contacts', 'error')} ">
+        <label for="contacts"> <g:message
+                code="person.contacts.label" default="Contacts" />
+        </label>
+        <ul class="one-to-many">
+            <g:each in="${campInstance?.contacts?}" var="c">
+                <li><g:link controller="campContact" action="show"
+                        id="${c.id}">
+                        ${c?.encodeAsHTML()}
+                    </g:link></li>
+            </g:each>
+            <li class="add"><g:link controller="campContact"
+                    action="create"
+                    params="['camp.id': campInstance?.id]">
+                    ${message(code: 'default.add.label', args: [message(code: 'contact.label', default: 'Contact')])}
+                </g:link></li>
+        </ul>
+    </div>
+</g:if>
 
 <div class="fieldcontain ${hasErrors(bean: campInstance, field: 'staff', 'error')} ">
 	<label for="staff">

@@ -83,17 +83,24 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${campInstance?.contact}">
-				<li class="fieldcontain">
-					<span id="contact-label" class="property-label"><g:message code="camp.contact.label" default="Contact" /></span>
-					
-						<span class="property-value" aria-labelledby="contact-label"><g:link controller="contact" action="show" id="${campInstance?.contact?.id}">${campInstance?.contact?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${campInstance?.staff}">
+
+
+                <g:if test="${campInstance?.contacts}">
+                <li class="fieldcontain"><span id="contacts-label"
+                    class="property-label"><g:message
+                            code="person.contacts.label"
+                            default="Contacts" /></span> <g:each
+                        in="${campInstance.contacts}" var="c">
+                        <span class="property-value"
+                            aria-labelledby="contacts-label"><g:link
+                                controller="campContact" action="show"
+                                id="${c.id}">
+                                ${c?.encodeAsHTML()}
+                            </g:link></span>
+                    </g:each></li>
+                </g:if>
+
+                <g:if test="${campInstance?.staff}">
 				<li class="fieldcontain">
 					<span id="staff-label" class="property-label"><g:message code="camp.staff.label" default="Staff" /></span>
 					
