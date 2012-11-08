@@ -116,7 +116,7 @@
                         in="${personInstance.contacts}" var="c">
                         <span class="property-value"
                             aria-labelledby="contacts-label"><g:link
-                                controller="contact" action="show"
+                                controller="personContact" action="show"
                                 id="${c.id}">
                                 ${c?.encodeAsHTML()}
                             </g:link></span>

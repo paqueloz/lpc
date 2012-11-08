@@ -44,7 +44,6 @@ class Camp implements Comparable {
         zipCode(nullable: true)
         city(nullable: true)
         country(nullable: true)
-        contact(nullable: true)
     }
     
     static searchable = {

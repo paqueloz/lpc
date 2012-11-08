@@ -2,7 +2,7 @@ package jaf
 
 import org.springframework.dao.DataIntegrityViolationException
 
-class ContactController {
+class PersonContactController {
 
     static allowedMethods = [save: "POST", update: "POST"]
 
@@ -12,15 +12,15 @@ class ContactController {
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [contactInstanceList: Contact.list(params), contactInstanceTotal: Contact.count()]
+        [contactInstanceList: PersonContact.list(params), contactInstanceTotal: PersonContact.count()]
     }
 
     def create() {
-        [contactInstance: new Contact(params)]
+        [contactInstance: new PersonContact(params)]
     }
 
     def save() {
-        def contactInstance = new Contact(params)
+        def contactInstance = new PersonContact(params)
         if (!contactInstance.save(flush: true)) {
             render(view: "create", model: [contactInstance: contactInstance])
             return
@@ -31,7 +31,7 @@ class ContactController {
     }
 
     def show() {
-        def contactInstance = Contact.get(params.id)
+        def contactInstance = PersonContact.get(params.id)
         if (!contactInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.id])
             redirect(action: "list")
@@ -42,7 +42,7 @@ class ContactController {
     }
 
     def edit() {
-        def contactInstance = Contact.get(params.id)
+        def contactInstance = PersonContact.get(params.id)
         if (!contactInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.id])
             redirect(action: "list")
@@ -53,7 +53,7 @@ class ContactController {
     }
 
     def update() {
-        def contactInstance = Contact.get(params.id)
+        def contactInstance = PersonContact.get(params.id)
         if (!contactInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.id])
             redirect(action: "list")
@@ -83,7 +83,7 @@ class ContactController {
     }
 
     def delete() {
-        def contactInstance = Contact.get(params.id)
+        def contactInstance = PersonContact.get(params.id)
         if (!contactInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), params.id])
             redirect(action: "list")

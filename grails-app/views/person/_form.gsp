@@ -97,7 +97,7 @@
         </label>
         <ul class="one-to-many">
             <g:each in="${personInstance?.contacts?}" var="c">
-                <li><g:link controller="contact" action="show"
+                <li><g:link controller="personContact" action="show"
                         id="${c.id}">
                         ${c?.encodeAsHTML()}
                     </g:link></li>
