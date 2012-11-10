@@ -2,21 +2,30 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'person', 'error')} required">
-	<label for="person">
-		<g:message code="staff.person.label" default="Person" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="person" name="person.id" from="${jaf.Person.list()}" optionKey="id" required="" value="${staffInstance?.person?.id}" class="many-to-one"/>
+<%-- BEGIN MANUAL EDIT --%>
+<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'camp', 'error')} required">
+    <label for="camp">
+        <g:message code="staff.camp.label" default="Camp" />
+    </label>
+    <g:link controller="camp" action="show" id="${staffInstance?.camp?.id}">${staffInstance?.camp?.encodeAsHTML()}</g:link>
+    <g:hiddenField name="camp.id" value="${staffInstance?.camp?.id}" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'camp', 'error')} required">
-	<label for="camp">
-		<g:message code="staff.camp.label" default="Camp" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="camp" name="camp.id" from="${jaf.Camp.list()}" optionKey="id" required="" value="${staffInstance?.camp?.id}" class="many-to-one"/>
+<div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'other', 'error')} required">
+    <label for="person">
+        <g:message code="staff.person.label" default="Person" />
+        <span class="required-indicator">*</span>
+    </label>
+    <g:hiddenField name="person_id_old" value="${staffInstance?.person?.id}" />
+    <gui:autoComplete id="person"
+        value="${staffInstance?.person?.toStringForSearch()}" 
+        resultName="result" labelField="name" idField="id" 
+        controller="person" action="autoCompleteJSON"
+        minQueryLength='1' queryDelay='0.3'
+        queryAppend="*" maxResultsDisplayed='20'
+    />
 </div>
+<%-- END MANUAL EDIT --%>
 
 <div class="fieldcontain ${hasErrors(bean: staffInstance, field: 'comment', 'error')} ">
 	<label for="comment">

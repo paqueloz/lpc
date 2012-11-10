@@ -5,6 +5,9 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'staff.label', default: 'Staff')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+        <%-- BEGIN MANUAL EDIT --%>
+        <gui:resources components="['toolTip','autoComplete']"/>
+        <%-- END MANUAL EDIT --%>
 	</head>
 	<body>
 		<a href="#edit-staff" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -12,7 +15,11 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <%-- BEGIN MANUAL EDIT --%>
+                <%-- 
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                --%>
+                <%-- END MANUAL EDIT --%>
 			</ul>
 		</div>
 		<div id="edit-staff" class="content scaffold-edit" role="main">

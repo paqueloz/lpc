@@ -74,21 +74,23 @@
     </div>
 </g:if>
 
-<div class="fieldcontain ${hasErrors(bean: campInstance, field: 'staff', 'error')} ">
-	<label for="staff">
-		<g:message code="camp.staff.label" default="Staff" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${campInstance?.staff?}" var="s">
-    <li><g:link controller="staff" action="show" id="${s.id}">${s?.toStringForCamp().encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="staff" action="create" params="['camp.id': campInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'staff.label', default: 'Staff')])}</g:link>
-</li>
-</ul>
-
+<div
+    class="fieldcontain ${hasErrors(bean: campInstance, field: 'staff', 'error')} ">
+    <label for="staff"> <g:message code="camp.staff.label"
+            default="Staff" />
+    </label>
+    <ul class="one-to-many">
+        <g:each in="${campInstance?.staff?}" var="s">
+            <li><g:link controller="staff" action="show"
+                    id="${s.id}">
+                    ${s?.toStringForCamp().encodeAsHTML()}
+                </g:link></li>
+        </g:each>
+        <li class="add"><g:link controller="staff" action="create"
+                params="['camp.id': campInstance?.id]">
+                ${message(code: 'default.add.label', args: [message(code: 'staff.label', default: 'Staff')])}
+            </g:link></li>
+    </ul>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: campInstance, field: 'years', 'error')} ">

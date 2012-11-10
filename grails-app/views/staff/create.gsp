@@ -5,6 +5,9 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'staff.label', default: 'Staff')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+        <%-- BEGIN MANUAL EDIT --%>
+        <gui:resources components="['toolTip','autoComplete']"/>
+        <%-- END MANUAL EDIT --%>
 	</head>
 	<body>
 		<a href="#create-staff" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

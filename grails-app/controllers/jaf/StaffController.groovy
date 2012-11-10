@@ -20,7 +20,17 @@ class StaffController {
     }
 
     def save() {
-        def staffInstance = new Staff(params)
+        // BEGIN MANUAL EDIT
+        Camp c
+        if (params.camp.id) {
+            c = Camp.findById(params.camp.id)
+        }
+        Person p
+        if (params.person_id) {
+            p = Person.findById(params.person_id)
+        }
+        def staffInstance = new Staff(camp:c,person:p,comment:params.comment,startDate:params.startDate,endDate:params.endDate)
+        // END MANUAL EDIT
         if (!staffInstance.save(flush: true)) {
             render(view: "create", model: [staffInstance: staffInstance])
             return
@@ -71,8 +81,19 @@ class StaffController {
             }
         }
 
-        staffInstance.properties = params
 
+        // BEGIN MANUAL EDIT
+        // the search field is causing trouble to the next line
+        // staffInstance.properties = params
+        if (!params.person_id) {
+            params.person_id = params.person_id_old
+        }
+        staffInstance.person = Person.findById(params.person_id)
+        staffInstance.comment = params.comment
+        staffInstance.startDate = params.startDate
+        staffInstance.endDate = params.endDate
+        // END MANUAL EDIT
+        
         if (!staffInstance.save(flush: true)) {
             render(view: "edit", model: [staffInstance: staffInstance])
             return

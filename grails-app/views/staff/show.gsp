@@ -13,7 +13,11 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <%-- BEGIN MANUAL EDIT --%>
+                <%-- 
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                --%>
+                <%-- END MANUAL EDIT --%>
 			</ul>
 		</div>
 		<div id="show-staff" class="content scaffold-show" role="main">
@@ -23,20 +27,22 @@
 			</g:if>
 			<ol class="property-list staff">
 			
+                <%-- BEGIN MANUAL EDIT --%>
+                <g:if test="${staffInstance?.camp}">
+                <li class="fieldcontain">
+                    <span id="camp-label" class="property-label"><g:message code="staff.camp.label" default="Camp" /></span>
+                    
+                        <span class="property-value" aria-labelledby="camp-label"><g:link controller="camp" action="show" id="${staffInstance?.camp?.id}">${staffInstance?.camp?.encodeAsHTML()}</g:link></span>
+                    
+                </li>
+                </g:if>
+                <%-- END MANUAL EDIT --%>
+            
 				<g:if test="${staffInstance?.person}">
 				<li class="fieldcontain">
 					<span id="person-label" class="property-label"><g:message code="staff.person.label" default="Person" /></span>
 					
 						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${staffInstance?.person?.id}">${staffInstance?.person?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${staffInstance?.camp}">
-				<li class="fieldcontain">
-					<span id="camp-label" class="property-label"><g:message code="staff.camp.label" default="Camp" /></span>
-					
-						<span class="property-value" aria-labelledby="camp-label"><g:link controller="camp" action="show" id="${staffInstance?.camp?.id}">${staffInstance?.camp?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
