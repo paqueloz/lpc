@@ -3,11 +3,11 @@
 
 
 <div class="fieldcontain ${hasErrors(bean: campYearInstance, field: 'camp', 'error')} required">
-	<label for="camp">
-		<g:message code="campYear.camp.label" default="Camp" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="camp" name="camp.id" from="${jaf.Camp.list()}" optionKey="id" required="" value="${campYearInstance?.camp?.id}" class="many-to-one"/>
+    <%-- BEGIN MANUAL EDIT --%>
+	<label for="camp"><g:message code="campYear.camp.label" default="Camp" /></label>
+    <g:link controller="camp" action="show" id="${campYearInstance?.camp?.id}">${campYearInstance?.camp?.encodeAsHTML()}</g:link>
+    <g:hiddenField name="camp.id" value="${campYearInstance?.camp?.id}" />
+    <%-- BEGIN MANUAL EDIT --%>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: campYearInstance, field: 'year', 'error')} required">

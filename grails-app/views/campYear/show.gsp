@@ -45,18 +45,22 @@
 				<g:if test="${campYearInstance?.beginDate}">
 				<li class="fieldcontain">
 					<span id="beginDate-label" class="property-label"><g:message code="campYear.beginDate.label" default="Begin Date" /></span>
-					
-						<span class="property-value" aria-labelledby="beginDate-label"><g:formatDate date="${campYearInstance?.beginDate}" /></span>
-					
+                    <%--BEGIN MANUAL EDIT --%>
+                    <span class="property-value" aria-labelledby="beginDate-label">
+                        <g:formatDate date="${campYearInstance?.beginDate}" type="date" style="MEDIUM" />
+                    </span>
+                    <%--END MANUAL EDIT --%>
 				</li>
 				</g:if>
 			
 				<g:if test="${campYearInstance?.endDate}">
 				<li class="fieldcontain">
 					<span id="endDate-label" class="property-label"><g:message code="campYear.endDate.label" default="End Date" /></span>
-					
-						<span class="property-value" aria-labelledby="endDate-label"><g:formatDate date="${campYearInstance?.endDate}" /></span>
-					
+                    <%--BEGIN MANUAL EDIT --%>
+                    <span class="property-value" aria-labelledby="endDate-label">
+                        <g:formatDate date="${campYearInstance?.endDate}" type="date" style="MEDIUM" />
+                    </span>
+                    <%--END MANUAL EDIT --%>
 				</li>
 				</g:if>
 			
