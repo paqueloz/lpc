@@ -19,6 +19,17 @@
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
 		</div>
+        <%-- BEGIN MANUAL EDIT --%>
+        <script type="text/javascript">
+        function validateOther(msg) {
+            var v = document.getElementById("other_id");
+            var t = document.getElementById("other");
+            if (v.value=="" && t.value!="") {
+                return confirm(msg);
+            }
+        }
+        </script>
+        <%-- END MANUAL EDIT --%>
 		<div id="create-personRelation" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -36,7 +47,11 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <%-- BEGIN MANUAL EDIT --%>
+					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" 
+                        onclick="return validateOther('${message(code: 'personRelation.create.confirm.message', 
+                            default: 'The person is not in the database, OK to create a new record?')}');"/>
+                    <%-- END MANUAL EDIT --%>
 				</fieldset>
 			</g:form>
 		</div>

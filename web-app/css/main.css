@@ -314,6 +314,11 @@ input:focus, select:focus, textarea:focus {
 	top: 0.1em;
 }
 
+.tip {
+    font-style: oblique;
+    font-size: 80%;
+}
+
 ul.one-to-many {
 	display: inline-block;
 	list-style-position: inside;

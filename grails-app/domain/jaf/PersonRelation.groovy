@@ -62,6 +62,6 @@ class PersonRelation {
 // better if the person referenced by livesWith has an address
 
 enum Relationship {
-    parentOf, childOf, livesWith
+    childOf, livesWith, parentOf
 }
 

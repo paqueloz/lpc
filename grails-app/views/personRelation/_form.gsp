@@ -34,6 +34,11 @@
         minQueryLength='1' queryDelay='0.3'
         queryAppend="*" maxResultsDisplayed='20'
     />
+    <%-- BEGIN MANUAL EDIT --%>
+    <span class="tip">
+    <g:message code="personRelation.tip.label" default="Tip: if the name is not found in the database a new Person will be created."/>
+    </span>
+    <%-- END MANUAL EDIT --%>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: personRelationInstance, field: 'comment', 'error')} ">

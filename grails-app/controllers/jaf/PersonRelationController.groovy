@@ -56,6 +56,16 @@ class PersonRelationController {
                 otherPerson = Person.findById(params.other_id)
             }
         }
+        /* BEGIN MANUAL EDIT */
+        // create other person on the fly if there is no other_id and a non-empty other
+        if (!params.other_id && params.other?.trim().length() > 0) {
+            String other = params.other.trim()
+            int split = other.lastIndexOf(' ')
+            otherPerson = new Person(firstName: split<0 ? "" : other.substring(0,split).trim(),
+                 lastName: other.substring(split+1),
+                 status: PersonStatus.Friend).save(flush:true)
+        }
+        /* END MANUAL EDIT */
         def pri = new PersonRelation( person : aPerson,
                             relationship    : params.relationship,
                             other           : otherPerson,

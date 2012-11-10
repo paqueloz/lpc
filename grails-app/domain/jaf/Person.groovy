@@ -33,7 +33,7 @@ class Person {
     Date deathDay
 
     String preferences
-    Gender gender
+    Gender gender = Gender.UNdefined
 
     boolean appliedForNextYear  // participant has applied for next year
     PersonStatus status         // last (highest?) attendance status
@@ -58,7 +58,7 @@ class Person {
         firstName(blank: false)
         lastName(blank: false)
         gender()
-        birthDay()
+        birthDay(nullable: true)
         deathDay(nullable: true)
         address(size: 0..1)         // enforced in view (not by scaffolding)
         contacts()

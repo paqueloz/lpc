@@ -40,31 +40,17 @@ class Staff {
         startDate(nullable: true)
         endDate(nullable: true)
     }
-    
-    // TODO remove person selector (similar to address)
 
     String toString() {
-        String result = camp.toString();
-        if (startDate) {
-            Calendar cal = new GregorianCalendar()
-            cal.setTime(startDate)
-            int startYear = cal.get(Calendar.YEAR)
-            if (endDate) {
-                cal.setTime(endDate)
-                int endYear = cal.get(Calendar.YEAR)
-                result += " (${startYear}-${endYear})"
-            } else {
-                result += " (since ${startYear})"
-            }
-        }
-        if (comment) {
-            result += " ${comment}"
-        }
-        return result;
+        return camp.toString() + otherFields()
     }
 
     String toStringForCamp() {
-        String result = person.toString();
+        return person.toString() + otherFields()
+    }
+
+    String otherFields() {
+        String result
         if (startDate) {
             Calendar cal = new GregorianCalendar()
             cal.setTime(startDate)
@@ -80,7 +66,7 @@ class Staff {
         if (comment) {
             result += " ${comment}"
         }
-        return result;
+        return result
     }
-
+    
 }

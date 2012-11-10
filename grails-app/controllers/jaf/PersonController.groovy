@@ -37,7 +37,11 @@ class PersonController {
     }
 
     def create() {
-        [personInstance: new Person(params)]
+        /* BEGIN MANUAL EDIT */
+        Person personInstance = new Person(params)
+        personInstance.status = PersonStatus.CAmper 
+        [personInstance: personInstance]
+        /* END MANUAL EDIT */
     }
 
     def save() {
