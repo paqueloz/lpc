@@ -7,6 +7,7 @@
 		<g:set var="entityName" value="${message(code: 'campYear.label', default: 'CampYear')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
         <gui:resources components="['toolTip','autoComplete']" />
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}"  type="text/css"/>
 	</head>
 	<body>
 		<a href="#show-campYear" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

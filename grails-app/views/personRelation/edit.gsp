@@ -6,6 +6,7 @@
 		<g:set var="entityName" value="${message(code: 'personRelation.label', default: 'PersonRelation')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
         <gui:resources components="['toolTip','autoComplete']"/>
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}"  type="text/css"/>
 	</head>
 	<body>
 		<a href="#edit-personRelation" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

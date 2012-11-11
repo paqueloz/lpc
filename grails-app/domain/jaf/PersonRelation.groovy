@@ -53,6 +53,8 @@ class PersonRelation {
             case "childOf":
                 return Relationship.parentOf
             case "livesWith":
+            case "spouseOf":
+            case "partnerOf":
                 return r
         }
     }
@@ -62,6 +64,6 @@ class PersonRelation {
 // better if the person referenced by livesWith has an address
 
 enum Relationship {
-    childOf, livesWith, parentOf
+    childOf, livesWith, parentOf, spouseOf, partnerOf
 }
 

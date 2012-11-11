@@ -36,7 +36,10 @@ class AddressController {
     }
 
     def create() {
-        [addressInstance: new Address(params)]
+        /* BEGIN MANUAL EDIT */
+        Address addressInstance = new Address(params)
+        addressInstance.active = true
+        [addressInstance: addressInstance]
     }
 
     def save() {

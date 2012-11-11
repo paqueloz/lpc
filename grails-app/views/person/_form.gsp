@@ -26,13 +26,15 @@
 	<g:select name="gender" from="${jaf.Gender?.values()}" keys="${jaf.Gender.values()*.name()}" required="" value="${personInstance?.gender?.name()}"/>
 </div>
 
+<%-- BEGIN MANUAL EDIT --%>
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'birthDay', 'error')} required">
 	<label for="birthDay">
 		<g:message code="person.birthDay.label" default="Birth Day" />
-		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="birthDay" precision="day"  value="${personInstance?.birthDay}"  />
+	<g:datePicker name="birthDay" precision="day"  value="${personInstance?.birthDay}"  default="none"
+            noSelection="['': '']"  />
 </div>
+<%-- BEGIN MANUAL EDIT --%>
 
 <%-- Death day: hide this area until Person is in the database --%>
 <g:if test="${personInstance?.id}">

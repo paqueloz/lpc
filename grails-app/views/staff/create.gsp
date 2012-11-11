@@ -7,6 +7,7 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
         <%-- BEGIN MANUAL EDIT --%>
         <gui:resources components="['toolTip','autoComplete']"/>
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}"  type="text/css"/>
         <%-- END MANUAL EDIT --%>
 	</head>
 	<body>
