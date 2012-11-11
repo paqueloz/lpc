@@ -98,14 +98,20 @@
                     class="property-label"><g:message
                             code="person.address.label"
                             default="Address" /></span> <%--<span class="property-value" aria-labelledby="address-label"><g:link controller="address" action="show" id="${personInstance?.address?.id}">${personInstance?.address?.encodeAsHTML()}</g:link></span>
-					        --%> <g:each in="${address}" var="c">
-                        <span class="property-value"
-                            aria-labelledby="address-label"><g:link
-                                controller="address" action="show"
-                                id="${c.id}">
+					        --%> 
+                    <g:each in="${address}" var="c">
+                        <span class="property-value" aria-labelledby="address-label">
+                            <g:link controller="address" action="show" id="${c.id}">
                                 ${c?.encodeAsHTML()}
-                            </g:link></span>
-                    </g:each></li>
+                            </g:link>
+                        </span>
+                    </g:each>
+                    <g:if test="${sharedAddress}">
+                        <span class="property-value" >
+                            <g:message code="person.address.shared.label" default="Shared by {0} people" args="${[sharedCount]}"  />
+                        </span>
+                    </g:if>
+                </li>
             </g:if>
 
             <g:if test="${personInstance?.contacts}">

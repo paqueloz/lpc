@@ -65,11 +65,44 @@ class PersonRelationController {
                  lastName: other.substring(split+1),
                  status: PersonStatus.Friend).save(flush:true)
         }
-        /* END MANUAL EDIT */
+        
         def pri = new PersonRelation( person : aPerson,
                             relationship    : params.relationship,
                             other           : otherPerson,
                             comment         : params.comment )
+        
+        if (pri.validate() && pri.relationship == Relationship.livesWith) {
+            // forbidden to connect aPerson if it already has an outgoing livesWith
+            if (PersonRelation.countByRelationshipAndPerson(Relationship.livesWith, aPerson)) {
+                pri.errors.reject( 'personrelation.liveswith.already', [] as Object[], "The relationship is already defined for this person")
+                // The following helps with field highlighting in your view
+                pri.errors.rejectValue( 'relationship', '' )
+                render(view: "create", model: [personRelationInstance: pri]) // FIXME breaks the autocomplete
+                return
+            }
+            // forbidden to connect aPerson if it already has an incoming livesWith
+            // unless otherPerson has no outgoing livesWith and no incoming livesWith
+            if (PersonRelation.countByRelationshipAndOther(Relationship.livesWith, aPerson)) {
+                if (PersonRelation.countByRelationshipAndOther(Relationship.livesWith, otherPerson)
+                    || PersonRelation.countByRelationshipAndPerson(Relationship.livesWith, otherPerson)) 
+                {
+                    pri.errors.reject( 'personrelation.liveswith.invalid', [] as Object[], "Adding this relationship would cause an invalid network")
+                    // The following helps with field highlighting in your view
+                    pri.errors.rejectValue( 'relationship', '' )
+                    render(view: "create", model: [personRelationInstance: pri]) // FIXME breaks the autocomplete
+                    return
+                } else {
+                    pri.person = otherPerson    // FIXME add a message about the inverted relation
+                                                // TODO, add a simple way to find incoming "liveswith"
+                                                // for instance when the address is displayed with
+                                                // usage count
+                    pri.other = aPerson
+                }
+            }
+        }
+ 
+        /* END MANUAL EDIT */
+
         if (!pri.save(flush: true)) {
             render(view: "create", model: [personRelationInstance: pri])
             return

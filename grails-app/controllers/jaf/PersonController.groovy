@@ -68,17 +68,21 @@ class PersonController {
         }
         // use relationship to find address
         def addr = personInstance.address;
+        int shared = 0  // people sharing this address
         if (!addr?.size()) {
             for (relation in personInstance.relationships) {
                 if (relation.relationship != Relationship.livesWith) {
                     continue
                 }
                 addr = relation.other.address
+                shared = 1 + PersonRelation.countByRelationshipAndOther(Relationship.livesWith, relation.other)
                 break
             }
+        } else {
+            shared = 1 + PersonRelation.countByRelationshipAndOther(Relationship.livesWith, personInstance)
         }
         // view should use address and not the value inside personInstance
-        [personInstance: personInstance, address: addr]
+        [personInstance: personInstance, address: addr, sharedAddress: shared>1, sharedCount: shared]
     }
     
     def edit() {
