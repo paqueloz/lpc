@@ -74,6 +74,8 @@
     </div>
 </g:if>
 
+<%-- staff: hide this area until Camp is in the database --%>
+<g:if test="${campInstance?.id}">
 <div
     class="fieldcontain ${hasErrors(bean: campInstance, field: 'staff', 'error')} ">
     <label for="staff"> <g:message code="camp.staff.label"
@@ -92,7 +94,10 @@
             </g:link></li>
     </ul>
 </div>
+</g:if>
 
+<%-- Years: hide this area until Camp is in the database --%>
+<g:if test="${campInstance?.id}">
 <div class="fieldcontain ${hasErrors(bean: campInstance, field: 'years', 'error')} ">
 	<label for="years">
 		<g:message code="camp.years.label" default="Years" />
@@ -109,4 +114,4 @@
 </ul>
 
 </div>
-
+</g:if>
