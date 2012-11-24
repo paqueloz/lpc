@@ -22,12 +22,17 @@
 		</div>
         <%-- BEGIN MANUAL EDIT --%>
         <script type="text/javascript">
-        function validateOther(msg) {
+        function validateOther(msgnew,msgaddr,num) {
             var v = document.getElementById("other_id");
             var t = document.getElementById("other");
             if (v.value=="" && t.value!="") {
-                return confirm(msg);
+                if (!confirm(msgnew)) return false;
             }
+            var r = document.getElementById("relationship");
+            if (r.value=="livesWith" && num>0) {
+                if (!confirm(msgaddr)) return false;
+            }
+            return true;
         }
         </script>
         <%-- END MANUAL EDIT --%>
@@ -51,7 +56,10 @@
                     <%-- BEGIN MANUAL EDIT --%>
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" 
                         onclick="return validateOther('${message(code: 'personRelation.create.confirm.message', 
-                            default: 'The person is not in the database, OK to create a new record?')}');"/>
+                            default: 'The person is not in the database, OK to create a new record?')}',
+                            '${message(code: 'personRelation.create.confirm.message.address', 
+                            default: 'The person already has an address, OK to clear it?')}',
+                            ${addrCount});"/>
                     <%-- END MANUAL EDIT --%>
 				</fieldset>
 			</g:form>

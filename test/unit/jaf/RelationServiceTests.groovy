@@ -2,7 +2,7 @@
  *   This program manages the database and supports the work processes
  *   of the Luethi-Peterson Camps association (http://luethipetersoncamps.org/).
  *
- *   Copyright (C) 2012 Jacques Fontignie, Pierre-Antoine Queloz
+ *   Copyright (C) 2012 Pierre-Antoine Queloz
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,41 +20,18 @@
 
 package jaf
 
-import grails.plugins.countries.Country
 
-class Address {
 
-    static belongsTo = [person:Person]
+import grails.test.mixin.*
+import org.junit.*
 
-    String street1
-    String street2
-    String zipCode
-    String city
-    Country country
-    boolean active
+/**
+ * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
+ */
+@TestFor(RelationService)
+class RelationServiceTests {
 
-    Date dateCreated
-    Date lastUpdated
-
-    static constraints = {
-        person(nullable: false)
-        street1()
-        street2(nullable: true)
-        zipCode(nullable: true)
-        city(nullable: true)
-        country(nullable: true)
-        active()
+    void testSomething() {
+        fail "Implement me"
     }
-
-    static searchable = {
-        except = ['dateCreated','lastUpdated','country']
-    }
-    
-    def String toString() {
-        "${street1} ${street2?:''} ${zipCode}"
-    }
-    
-    boolean equals(other) { other?.id == id }
-    
-    int hashCode() { id ?: 0 }
 }

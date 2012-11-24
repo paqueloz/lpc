@@ -2,7 +2,7 @@
  *   This program manages the database and supports the work processes
  *   of the Luethi-Peterson Camps association (http://luethipetersoncamps.org/).
  *
- *   Copyright (C) 2012 Jacques Fontignie, Pierre-Antoine Queloz
+ *   Copyright (C) 2012 Pierre-Antoine Queloz
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -17,44 +17,17 @@
  *   You should have received a copy of the GNU General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
 package jaf
 
-import grails.plugins.countries.Country
+class RelationService {
 
-class Address {
-
-    static belongsTo = [person:Person]
-
-    String street1
-    String street2
-    String zipCode
-    String city
-    Country country
-    boolean active
-
-    Date dateCreated
-    Date lastUpdated
-
-    static constraints = {
-        person(nullable: false)
-        street1()
-        street2(nullable: true)
-        zipCode(nullable: true)
-        city(nullable: true)
-        country(nullable: true)
-        active()
+    void deleteAddresses(Person p) {
+        for (Address a in p.address) {
+            log.info "Deleting address ${a}"
+            p.removeFromAddress(a)      // without this line the delete below fails
+            a.delete()                  // without this line the address remains
+        }
     }
 
-    static searchable = {
-        except = ['dateCreated','lastUpdated','country']
-    }
-    
-    def String toString() {
-        "${street1} ${street2?:''} ${zipCode}"
-    }
-    
-    boolean equals(other) { other?.id == id }
-    
-    int hashCode() { id ?: 0 }
 }

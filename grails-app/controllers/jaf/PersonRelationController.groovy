@@ -20,9 +20,13 @@
 
 package jaf
 
+import javax.management.relation.RelationService;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class PersonRelationController {
+    
+    def relationService
 
     static allowedMethods = [save: "POST", update: "POST"]
 
@@ -36,7 +40,9 @@ class PersonRelationController {
     }
 
     def create() {
-        [personRelationInstance: new PersonRelation(params)]
+        /* BEGIN MANUAL EDIT */
+        [personRelationInstance: new PersonRelation(params), addrCount: (Person.findById(params.person?.id)?.address.size()) ?: 0]
+        /* END MANUAL EDIT */
     }
 
     /**
@@ -81,10 +87,12 @@ class PersonRelationController {
                 return
             }
             // forbidden to connect aPerson if it already has an incoming livesWith
-            // unless otherPerson has no outgoing livesWith and no incoming livesWith
+            // unless otherPerson has no outgoing livesWith and no incoming livesWith and no address
+            // then the relation is inverted
             if (PersonRelation.countByRelationshipAndOther(Relationship.livesWith, aPerson)) {
                 if (PersonRelation.countByRelationshipAndOther(Relationship.livesWith, otherPerson)
-                    || PersonRelation.countByRelationshipAndPerson(Relationship.livesWith, otherPerson)) 
+                    || PersonRelation.countByRelationshipAndPerson(Relationship.livesWith, otherPerson)
+                    || otherPerson.address?.size()) 
                 {
                     pri.errors.reject( 'personrelation.liveswith.invalid', [] as Object[], "Adding this relationship would cause an invalid network")
                     // The following helps with field highlighting in your view
@@ -99,6 +107,8 @@ class PersonRelationController {
                     pri.other = aPerson
                 }
             }
+            // remove existing addresses
+            relationService.deleteAddresses(pri.person)
         }
  
         /* END MANUAL EDIT */

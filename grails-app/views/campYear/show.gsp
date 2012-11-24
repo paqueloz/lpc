@@ -96,7 +96,7 @@
                         action="autoCompleteJSON" minQueryLength='1'
                         queryDelay='0.3' queryAppend="*"
                         maxResultsDisplayed='20' /></td>
-                <td><g:select name="status" from="${jaf.PersonStatus?.values()}" keys="${jaf.PersonStatus.values()*.name()}" required="" value="CAmper"/>
+                <td><g:select name="status" from="${jaf.PersonStatus?.values()}" keys="${jaf.PersonStatus.values()*.name()}" required="" value="Invited"/>
                 </td>
             </tr>
         </table>
