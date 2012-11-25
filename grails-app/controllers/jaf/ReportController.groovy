@@ -53,7 +53,7 @@ class ReportController {
 
         java.math.MathContext mc = new java.math.MathContext(3)
         
-        sql.eachRow("""SELECT
+        sql.eachRow("""SELECT p.id,
                 (
                 select group_concat(r.short_key) from
                 nationality nat
