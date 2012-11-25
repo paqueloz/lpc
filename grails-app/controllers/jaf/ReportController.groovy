@@ -70,7 +70,8 @@ class ReportController {
                 where applied_for_next_year = 1
                 HAVING (Age < 13.5)
                 ORDER BY nationality, p.gender, p.first_name, cy.year DESC, Age;""") {
-                    def rec = [ nationality : it.nationality,
+                    def rec = [ id: it.id,
+                        nationality : it.nationality,
                         gender : "",
                         firstName : it.first_name,
                         lastName : it.last_name,
@@ -111,7 +112,7 @@ class ReportController {
         
         java.math.MathContext mc = new java.math.MathContext(3)
         
-        sql.eachRow("""SELECT
+        sql.eachRow("""SELECT  p.id,
                 (
                 select group_concat(r.short_key) from
                 nationality nat
@@ -128,7 +129,8 @@ class ReportController {
                 where applied_for_next_year = 1
                 HAVING (Age >= 13.5 and Age <= 14.5)
                 ORDER BY nationality, p.gender, p.first_name, cy.year DESC, Age;""") {
-                    def rec = [ nationality : it.nationality,
+                    def rec = [ id: it.id,
+                        nationality : it.nationality,
                         gender : "",
                         firstName : it.first_name,
                         lastName : it.last_name,
@@ -168,7 +170,7 @@ class ReportController {
         
         java.math.MathContext mc = new java.math.MathContext(3)
         
-        sql.eachRow("""SELECT
+        sql.eachRow("""SELECT p.id,
                 (
                 select group_concat(r.short_key) from
                 nationality nat
@@ -185,7 +187,8 @@ class ReportController {
                 where applied_for_next_year = 1
                 and p.status = 'CAmper' HAVING (Age > 14.5)
                 ORDER BY nationality, p.gender, p.first_name, cy.year DESC, Age;""") {
-                    def rec = [ nationality : it.nationality,
+                    def rec = [ id: it.id,
+                        nationality : it.nationality,
                         gender : "",
                         firstName : it.first_name,
                         lastName : it.last_name,
