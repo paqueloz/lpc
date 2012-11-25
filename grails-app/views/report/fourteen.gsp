@@ -47,38 +47,44 @@
         </tr>
     </table>
     <p>
+    <g:set var="lastId" value="" />
     <g:each in="${result}" status="i" var="camper">
         <div class="divCamper">
-            <p>
+            <g:if test="${camper.id!=lastId}">
+            <p></p>
+            </g>
             <table class="tableCamper" width="97%">
-                <tr>
-                    <td class="cellNationality" width="9%">
-                        ${camper.nationality}
-                    </td>
-                    <td class="cell" width="3%">
-                        ${camper.gender}
-                    </td>
-                    <td class="cellFirstName">
-                        ${camper.firstName}
-                    </td>
-                    <td class="cellLastName">
-                        ${camper.lastName}
-                    </td>
-                    <td class="cell">
-                        ${camper.age}
-                    </td>
-                    <td class="cell">
-                        ${camper.newToLpc?"New to LPC":"Not new"}
-                    </td>
-                </tr>
-                <tr>
-                    <td width="9%"></td>
-                    <td width="3%"></td>
-                    <td class="cellTag">Preferences:</td>
-                    <td class="cellPref" colspan="3">
-                        ${camper.preferences}
-                    </td>
-                </tr>
+                <g:if test="${camper.id!=lastId}">
+                    <tr>
+                        <td class="cellNationality" width="9%">
+                            ${camper.nationality}
+                        </td>
+                        <td class="cell" width="3%">
+                            ${camper.gender}
+                        </td>
+                        <td class="cellFirstName">
+                            ${camper.firstName}
+                        </td>
+                        <td class="cellLastName">
+                            ${camper.lastName}
+                        </td>
+                        <td class="cell">
+                            ${camper.age}
+                        </td>
+                        <td class="cell">
+                            ${camper.newToLpc?"New to LPC":"Not new"}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="9%"></td>
+                        <td width="3%"></td>
+                        <td class="cellTag">Preferences:</td>
+                        <td class="cellPref" colspan="3">
+                            ${camper.preferences}
+                        </td>
+                    </tr>
+                    <g:set var="lastId" value="${camper.id}" />
+                </g:if>
                 <tr>
                     <td width="9%"></td>
                     <td width="3%"></td>
