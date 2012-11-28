@@ -52,7 +52,7 @@
         <div class="divCamper">
             <g:if test="${camper.id!=lastId}">
             <p></p>
-            </g>
+            </g:if>
             <table class="tableCamper" width="97%">
                 <g:if test="${camper.id!=lastId}">
                     <tr>

@@ -46,6 +46,15 @@
   <li><g:link action="fourteen"><g:message code="report.fourteen" default="14th year old"/></g:link></li>
   <li><g:link action="older"><g:message code="report.older" default="Older"/></g:link></li>
   <li><g:link action="counselor"><g:message code="report.counselor" default="Counselor"/></g:link></li>
+    <sec:ifAllGranted roles="ROLE_EXPORT">
+      <li><g:link action="appliedForNextYear" params="[format:'excel',ext:'xls']">
+        <g:message code="report.applied.for.next.year" default="Labels for people who applied for next year"/>
+      </g:link></li>
+      <li><g:link action="notSelectedAtCC" params="[format:'excel',ext:'xls']">
+        <g:message code="report.not.selected.at.cc" default="Not selected at CC"/>
+      </g:link></li>
+    </sec:ifAllGranted>
+  
   </ul>
   </div>
   </body>

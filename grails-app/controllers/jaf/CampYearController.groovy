@@ -23,6 +23,10 @@ package jaf
 import org.springframework.dao.DataIntegrityViolationException
 
 class CampYearController {
+    
+    // export CSV,XLS...
+    def exportService
+    def grailsApplication
 
     static allowedMethods = [save: "POST", update: "POST"]
 
@@ -122,4 +126,15 @@ class CampYearController {
             redirect(action: "show", id: params.id)
         }
     }
+    
+    def export() {
+        def campYearInstance = CampYear.get(params.id)
+        if (params?.format && params.format != "html") {
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=addresses.${params.ext}")
+            def l = campYearInstance.attendances.collect() { Attendance it -> it.person }
+            exportService.export(params.format, response.outputStream, l, [:], [:])
+        }
+    }
+
 }

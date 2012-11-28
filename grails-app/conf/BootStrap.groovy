@@ -39,6 +39,7 @@ class BootStrap {
         def readerRole = SecRole.findByAuthority('ROLE_READER') ?: new SecRole(authority: 'ROLE_READER').save(failOnError: true)
         def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
         def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
+        def exportRole = SecRole.findByAuthority('ROLE_EXPORT') ?: new SecRole(authority: 'ROLE_EXPORT').save(failOnError: true)
         
         /*
          * If there is no "admin", create it
@@ -55,6 +56,7 @@ class BootStrap {
             SecUserSecRole.create adminUser, readerRole
             SecUserSecRole.create adminUser, userRole
             SecUserSecRole.create adminUser, adminRole
+            SecUserSecRole.create adminUser, exportRole
         }
         
         if (currentEnv == Environment.DEVELOPMENT) {

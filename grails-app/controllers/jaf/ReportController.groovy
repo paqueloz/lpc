@@ -26,8 +26,11 @@ import org.hibernate.*
 
 class ReportController {
 
-    SessionFactory sessionFactory
+    // export CSV,XLS...
+    def exportService
     def grailsApplication
+    
+    SessionFactory sessionFactory
 
     def index() {
         [:]
@@ -263,6 +266,32 @@ class ReportController {
                 }
 
         [result:recList]
+    }
+    
+    def appliedForNextYear() 
+    {
+        if (params?.format && params.format != "html") {
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=addresses.${params.ext}")
+            def l = Person.findAllByAppliedForNextYear(false)
+            exportService.export(params.format, response.outputStream, l, [:], [:])
+        }
+    }
+
+    def notSelectedAtCC() 
+    {
+        if (params?.format && params.format != "html") {
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=addresses.${params.ext}")
+            def l = Person.findAllByAppliedForNextYear(false)
+            exportService.export(params.format, response.outputStream, l, [:], [:])
+            // FIXME NotSelected-atCC
+            // FIXME il faut gérer l'année
+            // FIXME le lien pourrait se trouver dans le camp "notselected at cc"
+            // ici on mettrait juste un lien
+            // l'utilisateur cherche l'année
+            // va chercher les personnes et les ramène
+        }
     }
 
 }

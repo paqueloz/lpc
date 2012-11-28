@@ -110,6 +110,11 @@
                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
                             <g:message code="default.button.delete.label" default="Delete" />
                     </g:link>
+                    <sec:ifAllGranted roles="ROLE_EXPORT">
+                        <g:link class="export" action="export" id="${campYearInstance?.id}" params="[format:'excel',ext:'xls']">
+                            <g:message code="default.button.export.label" default="Export Addresses" />
+                        </g:link>
+                    </sec:ifAllGranted>
 				</fieldset>
 			</g:form>
 		</div>
