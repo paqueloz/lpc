@@ -139,6 +139,7 @@ class CampYearController {
                 date_format(p1.birth_day,'%d-%m-%Y') as BirthDay,
                 p1.first_name, 
                 p1.last_name, 
+                p1.parent_name,
                 p1.preferences,
                 (
                 select group_concat(concat(r6.short_key)) from nationality n6
