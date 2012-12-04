@@ -140,6 +140,18 @@ class CampYearController {
                 p1.first_name, 
                 p1.last_name, 
                 p1.parent_name,
+                (
+                select group_concat(concat(p5.first_name, ' ',p5.last_name)) from person_relation r5
+                left join person p5 on r5.other_id = p5.id
+                where r5.person_id = p1.id and  relationship = 'ChildOf' and p5.gender='MALE'
+                group by r5.person_id
+                ) as Father, 
+                (
+                select group_concat(concat(p6.first_name, ' ',p6.last_name)) from person_relation r6
+                left join person p6 on r6.other_id = p6.id
+                where r6.person_id = p1.id and  relationship = 'ChildOf' and p6.gender='FEMALE'
+                group by r6.person_id
+                ) as Mother,
                 p1.preferences,
                 (
                 select group_concat(concat(r6.short_key)) from nationality n6
@@ -164,6 +176,8 @@ class CampYearController {
                 where r4.person_id = p1.id
                 group by r4.person_id
                 ) as Relatives
+                
+                
                 
                 from person p1
                 left join person_relation r on p1.id=r.person_id and r.relationship='livesWith'
