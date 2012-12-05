@@ -176,9 +176,7 @@ class CampYearController {
                 where r4.person_id = p1.id
                 group by r4.person_id
                 ) as Relatives
-                
-                
-                
+                                
                 from person p1
                 left join person_relation r on p1.id=r.person_id and r.relationship='livesWith'
                 left join person p2 on p2.id=r.other_id
@@ -188,7 +186,7 @@ class CampYearController {
                 left join region reg2 on reg2.id = a2.country_id
                 where p1.id = ${personId};""")
     }
-        
+    
     def export() {
         def campYearInstance = CampYear.get(params.id)
         if (params?.format && params.format != "html") {
@@ -209,7 +207,9 @@ class CampYearController {
             def l = campYearInstance.attendances.collect() { Attendance it ->
                 getPerson(sql, it.person.id) 
             }
-            exportService.export(params.format, response.outputStream, l, [:], [:])
+            List fields = ['id','gender','NewToLPC','BirthDay','first_name','last_name','parent_name','Father','Mother','preferences',
+                'nationalities','languages','TypAdr','Street1','Street2','Zip_code','City','Country','Relatives']
+            exportService.export(params.format, response.outputStream, l, fields, [:], [:], [:])
         }
     }
 

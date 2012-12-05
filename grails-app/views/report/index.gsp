@@ -50,7 +50,9 @@
       <li><g:link action="appliedForNextYear" params="[format:'excel',ext:'xls']">
         <g:message code="report.applied.for.next.year" default="Labels for people who applied for next year"/>
       </g:link></li>
-      <li><g:link action="notSelectedAtCC" params="[format:'excel',ext:'xls']">
+      <li><g:link action="notSelectedAtCC" params="[format:'excel',ext:'xls']"
+        onclick="return confirm('${message(code: 'report.button.notselected.confirm.message', 
+            default: 'The report will contain people who have applied for next year but can not participate. Make sure you save the file because creating the report changes the database and you can not run it another time. OK to continue?')}');">
         <g:message code="report.not.selected.at.cc" default="Not selected at CC"/>
       </g:link></li>
     </sec:ifAllGranted>

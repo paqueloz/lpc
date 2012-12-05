@@ -86,6 +86,15 @@ class PersonRelationController {
                 render(view: "create", model: [personRelationInstance: pri]) // FIXME breaks the autocomplete
                 return
             }
+            // forbidden to connect to otherPerson if it already has an outgoing livesWith
+            if (PersonRelation.countByRelationshipAndPerson(Relationship.livesWith, otherPerson)) {
+                pri.errors.reject( 'personrelation.liveswith.invalid', [] as Object[], "Adding this relationship would cause an invalid network")
+                // The following helps with field highlighting in your view
+                pri.errors.rejectValue( 'relationship', '' )
+                render(view: "create", model: [personRelationInstance: pri]) // FIXME breaks the autocomplete
+                return
+            }
+
             // forbidden to connect aPerson if it already has an incoming livesWith
             // unless otherPerson has no outgoing livesWith and no incoming livesWith and no address
             // then the relation is inverted

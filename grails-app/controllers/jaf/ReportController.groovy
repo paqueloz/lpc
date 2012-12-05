@@ -20,6 +20,8 @@
 
 package jaf
 
+import java.sql.SQLClientInfoException;
+
 import groovy.sql.Sql
 
 import org.hibernate.*
@@ -329,24 +331,155 @@ class ReportController {
                 l << rec
             }
             log.info("Result:${l.size()}")
-            exportService.export(params.format, response.outputStream, l, [:], [:])
+            List fields = ['id','first_name','last_name','TypAdr','Street1','Street2','Zip_code','City','Country','Relatives']
+            exportService.export(params.format, response.outputStream, l, fields, [:], [:], [:])
         }
     }
 
     def notSelectedAtCC() 
     {
         if (params?.format && params.format != "html") {
+
+            def sql = Sql.newInstance(grailsApplication.config.dataSource.url,
+                grailsApplication.config.dataSource.username,
+                grailsApplication.config.dataSource.password,
+                grailsApplication.config.dataSource.driverClassName)
+            
+//            sql.execute("""
+//                DROP PROCEDURE IF EXISTS  `lpc`.`AfterCC`;
+//                DELIMITER \$\$
+//                CREATE DEFINER=`root`@`localhost` PROCEDURE `lpc`.`AfterCC`(
+//                  IN yearOfCamps INT
+//                )
+//                READS SQL DATA
+//                -- The year given in parameter is the year for which people submitted the application form
+//                -- in other words, the year of the end of the CC
+//                proc: BEGIN
+//                
+//                  -- Declare '_val' variables to read in each record from the cursor
+//                  DECLARE pID_val INT;
+//                
+//                  DECLARE debug SMALLINT DEFAULT 0;
+//                
+//                  -- Declare variables used just for cursor and loop control
+//                  DECLARE no_more_rows BOOLEAN;
+//                  DECLARE loop_cntr INT DEFAULT 0;
+//                  DECLARE num_rows INT DEFAULT 0;
+//                  DECLARE newInserted INT DEFAULT 0;
+//                  DECLARE campIdNotSelected INT;
+//                  
+//                  -- Declare the cursor
+//                  DECLARE pList_cur CURSOR FOR
+//                    select id from person where
+//                    id in (
+//                    select id from person where applied_for_next_year>0
+//                    ) and id not in (
+//                    -- person(s) who are in a camp (at least invited)
+//                    select distinct a.person_id from attendance a
+//                    left join camp_year cy on a.camp_id=cy.id and cy.year=yearOfCamps
+//                    left join camp c on cy.camp_id=c.id
+//                    where a.camp_id is not null AND cy.id is not null
+//                     and location<> 'NotSelected-atCC'
+//                    ) ;
+//                
+//                  -- Declare 'handlers' for exceptions
+//                  DECLARE CONTINUE HANDLER FOR NOT FOUND
+//                    SET no_more_rows = TRUE;
+//                
+//                  -- Creation of the "camp - NotSelected"
+//                  SET campIdNotSelected = (select id from camp where location like 'Not%' ) ;
+//                  SET @q1=concat('insert into camp_year (version,camp_id,year) VALUES (0,',campIdNotSelected,', ',yearOfCamps,')');
+//                  PREPARE query FROM @q1;
+//                  EXECUTE query;
+//                  DEALLOCATE PREPARE query;
+//                
+//                  SET campIdNotSelected = (select id from camp_year where camp_id=campIdNotSelected and year=yearOfCamps);
+//                  IF debug=1 THEN select cy.id 'ID of newCamp', c.location,cy.year from camp c
+//                      left join camp_year cy on cy.camp_id=c.id
+//                      where location like 'Not%'  and cy.year=2013 ;
+//                  END IF;
+//                  
+//                  -- 'open' the cursor and capture the number of rows returned
+//                  -- set the number of camps
+//                  OPEN pList_cur;
+//                  select FOUND_ROWS() into num_rows;
+//                  IF debug=1 THEN select 'Nb persons does not have a camp invitation', num_rows;  END IF;
+//                               
+//                  -- Initialise queries for insertion
+//                  SET @insertAttendance = concat('INSERT INTO `lpc`.`attendance` (version, camp_id, person_id,status) VALUES (0, ',campIdNotSelected, ' , ');
+//                
+//                  mainLoop: LOOP
+//                
+//                    FETCH  pList_cur INTO   pID_val;
+//                
+//                      IF debug=1 THEN select 'loop:', pID_val, loop_cntr, num_rows; END IF;
+//                    
+//                    -- break out of the loop if
+//                    IF loop_cntr >=  num_rows THEN
+//                        CLOSE pList_cur;
+//                        LEAVE mainLoop;
+//                    END IF;
+//                    SET loop_cntr = loop_cntr + 1;
+//                  
+//                    set @q1=concat(@insertAttendance, pID_val, ',''Invited'');');
+//                      IF debug=1 THEN select @q1; END IF;
+//                    
+//                      -- select @q1;
+//                    PREPARE query FROM @q1;
+//                    EXECUTE query;
+//                    DEALLOCATE PREPARE query;
+//                
+//                  END LOOP mainLoop;
+//                
+//                  select loop_cntr, ' persons invited to the camp ;;  person without invitation', num_rows ;
+//                  
+//                -- Remove the application form
+//                  set @q1='update person set applied_for_next_year=0 where applied_for_next_year<>0';
+//                  IF debug<>88 THEN select @q1 as 'Removing the application form'; END IF;
+//                    
+//                  PREPARE query FROM @q1;
+//                  EXECUTE query;
+//                  DEALLOCATE PREPARE query;
+//                
+//                END
+//                \$\$
+//                
+//                /*
+//                -- Supression des camps sans "attendance" (aucune personne)
+//                  select 'listOfCampWithoutPeople',group_concat(id) from camp_year cy
+//                  where cy.id not in ( select distinct camp_id from attendance)
+//                  group by 1
+//                    
+//                delete from camp_year where id in (
+//                411,412,413
+//                )
+//                
+//                
+//                -- Supression de toutes les attendances pour NotSelected(2013)
+//                delete from attendance where camp_id in (
+//                select cy.id from camp c
+//                left join camp_year cy on cy.camp_id=c.id
+//                where location like 'Not%' and cy.year=2013
+//                )
+//                
+//                */
+//            """)    
+
+            // assume that the query is run in December or January, take the year 3 months further
+            GregorianCalendar cal = new GregorianCalendar()
+            cal.add(Calendar.MONTH,3)
+            int yearOfCamps = cal.get(Calendar.YEAR)
+            log.info("Calling stored procedure for year ${yearOfCamps}")
+            def result = sql.execute("call AfterCC(${yearOfCamps})")
+
             response.contentType = grailsApplication.config.grails.mime.types[params.format]
             response.setHeader("Content-disposition", "attachment; filename=addresses.${params.ext}")
             def l = Person.findAllByAppliedForNextYear(false)
-            exportService.export(params.format, response.outputStream, l, [:], [:])
-            // FIXME NotSelected-atCC
-            // FIXME il faut gérer l'année
-            // FIXME le lien pourrait se trouver dans le camp "notselected at cc"
-            // ici on mettrait juste un lien
-            // l'utilisateur cherche l'année
-            // va chercher les personnes et les ramène
+            exportService.export(params.format, response.outputStream, result, [:], [:])
+
         }
     }
 
 }
+
+
