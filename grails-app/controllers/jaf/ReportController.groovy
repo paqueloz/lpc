@@ -303,7 +303,14 @@ class ReportController {
                 person p4 on r4.other_id = p4.id
                 where r4.person_id = p1.id
                 group by r4.person_id
-                ) as Relatives
+                ) as Relatives,
+                ( 
+                select c.location from attendance att 
+                left join camp_year cy on att.camp_id = cy.id and cy.year = 2013 
+                left join camp c on cy.camp_id = c.id 
+                where att.person_id = p1.id and cy.year=2013
+                ) as NextYearCamp
+
                 
                 from person p1
                 left join person_relation r on p1.id=r.person_id and r.relationship='livesWith'
@@ -313,7 +320,9 @@ class ReportController {
                 left join region reg on reg.id = a.country_id
                 left join region reg2 on reg2.id = a2.country_id
                 
-                where p1.applied_for_next_year>0;
+                where p1.applied_for_next_year>0
+                having (NextYearcamp IS NULL or NextYearcamp IS NOT NULL) 
+                order by NextYearcamp;
             """) {
                 // without the intermediate rec, export will not work
                 def rec = [
@@ -327,11 +336,12 @@ class ReportController {
                         City : it.City,
                         Country : it.Country,
                         Relatives : it.Relatives,
+                        NextYearcamp: it.NextYearcamp,
                     ]
                 l << rec
             }
             log.info("Result:${l.size()}")
-            List fields = ['id','first_name','last_name','TypAdr','Street1','Street2','Zip_code','City','Country','Relatives']
+            List fields = ['id','NextYearcamp','first_name','last_name','TypAdr','Street1','Street2','Zip_code','City','Country','Relatives']
             exportService.export(params.format, response.outputStream, l, fields, [:], [:], [:])
         }
     }
