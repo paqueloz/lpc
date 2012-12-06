@@ -30,6 +30,7 @@
                 margin: 2em 1em 1.25em 18em;
             }
         </style>
+                <gui:resources components="['toolTip']" />
   </head>
   <body>
         <div class="nav" role="navigation">
@@ -40,7 +41,7 @@
   
   <div id="header">
   </div>
-  <div id="page-body" role="main">
+  <div id="page-body" role="main" class="yui-skin-sam">
   <ul>
   <li><g:link action="younger"><g:message code="report.younger" default="Younger"/></g:link></li>
   <li><g:link action="fourteen"><g:message code="report.fourteen" default="14th year old"/></g:link></li>
@@ -52,8 +53,10 @@
       </g:link></li>
       <li><g:link action="notSelectedAtCC" params="[format:'excel',ext:'xls']"
         onclick="return confirm('${message(code: 'report.button.notselected.confirm.message', 
-            default: 'The report will contain people who have applied for next year but can not participate. Make sure you save the file because creating the report changes the database and you can not run it another time. OK to continue?')}');">
+            default: 'The operation changes the status of all people who have applied. Run it only once, after choosing camp participants. OK to continue?')}');">
+        <gui:toolTip text="${message(code:'report.not.selected.at.cc.tip',default:'People without camp will be listed in NotSelected-atCC.<br>All applications will be cleared.')}">
         <g:message code="report.not.selected.at.cc" default="Not selected at CC"/>
+        </gui:toolTip>
       </g:link></li>
     </sec:ifAllGranted>
   

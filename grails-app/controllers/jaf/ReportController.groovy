@@ -322,7 +322,7 @@ class ReportController {
                 
                 where p1.applied_for_next_year>0
                 having (NextYearcamp IS NULL or NextYearcamp IS NOT NULL) 
-                order by NextYearcamp;
+                order by NextYearcamp desc;
             """) {
                 // without the intermediate rec, export will not work
                 def rec = [
@@ -481,11 +481,18 @@ class ReportController {
             int yearOfCamps = cal.get(Calendar.YEAR)
             log.info("Calling stored procedure for year ${yearOfCamps}")
             def result = sql.execute("call AfterCC(${yearOfCamps})")
-
-            response.contentType = grailsApplication.config.grails.mime.types[params.format]
-            response.setHeader("Content-disposition", "attachment; filename=addresses.${params.ext}")
-            def l = Person.findAllByAppliedForNextYear(false)
-            exportService.export(params.format, response.outputStream, result, [:], [:])
+            def crit = CampYear.createCriteria()
+            def notSel = crit.get {
+                eq("year", yearOfCamps)
+                camp {
+                    eq('location','NotSelected-atCC')
+                }
+            }
+            if (notSel) {
+                redirect(controller:"campYear", action:"show", id:"${notSel.id}")
+            } else {
+                redirect(action:"index")
+            }
 
         }
     }
