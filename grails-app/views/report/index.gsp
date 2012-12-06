@@ -30,8 +30,8 @@
                 margin: 2em 1em 1.25em 18em;
             }
         </style>
-                <gui:resources components="['toolTip']" />
-  </head>
+                <%--<gui:resources components="['toolTip']" />
+  --%></head>
   <body>
         <div class="nav" role="navigation">
             <ul>
@@ -50,16 +50,29 @@
     <sec:ifAllGranted roles="ROLE_EXPORT">
       <li><g:link action="appliedForNextYear" params="[format:'excel',ext:'xls']">
         <g:message code="report.applied.for.next.year" default="Labels for people who applied for next year"/>
-      </g:link></li>
-      <li><g:link action="notSelectedAtCC" params="[format:'excel',ext:'xls']"
+      </g:link>
+        <br>
+        <span class="tip">
+        <g:message code='report.applied.for.next.year.tip' default='This list of labels is generated only for people who applied for next year. It must be generated before the end of the CC.'/>
+        </span>
+      </li>
+     </sec:ifAllGranted>
+     </ul>
+     <p> &nbsp; </p>
+     <ul>
+     <sec:ifAllGranted roles="ROLE_EXPORT">
+        <li><g:link action="notSelectedAtCC" params="[format:'excel',ext:'xls']"
         onclick="return confirm('${message(code: 'report.button.notselected.confirm.message', 
             default: 'The operation changes the status of all people who have applied. Run it only once, after choosing camp participants. OK to continue?')}');">
-        <gui:toolTip text="${message(code:'report.not.selected.at.cc.tip',default:'People without camp will be listed in NotSelected-atCC.<br>All applications will be cleared.')}">
         <g:message code="report.not.selected.at.cc" default="Not selected at CC"/>
-        </gui:toolTip>
-      </g:link></li>
-    </sec:ifAllGranted>
-  
+        </g:link>
+        <br>
+        <span class="tip">
+        <g:message code='report.not.selected.at.cc.tip' default='People without camp will be listed in NotSelected-atCC. All applications will be cleared.'/>
+        </span>
+        </li>
+     </sec:ifAllGranted>
+   
   </ul>
   </div>
   </body>
