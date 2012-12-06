@@ -341,7 +341,7 @@ class ReportController {
                 l << rec
             }
             log.info("Result:${l.size()}")
-            List fields = ['id','NextYearcamp','first_name','last_name','TypAdr','Street1','Street2','Zip_code','City','Country','Relatives']
+            List fields = ['NextYearcamp','id','first_name','last_name','TypAdr','Street1','Street2','Zip_code','City','Country','Relatives']
             exportService.export(params.format, response.outputStream, l, fields, [:], [:], [:])
         }
     }
