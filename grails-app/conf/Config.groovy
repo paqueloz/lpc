@@ -26,7 +26,7 @@
 //                             "file:${userHome}/.grails/${appName}-config.properties",
 //                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
-grails.config.locations = [ "file:${userHome}/.grails/lpc-config.properties" ]
+grails.config.locations = [ "file:${userHome}/.grails/lpc-config.properties", "file:c:\\tomcat6\\appdata\\lpc\\lpc-config.properties" ]
 
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
