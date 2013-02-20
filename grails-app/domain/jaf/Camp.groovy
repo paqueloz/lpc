@@ -58,6 +58,12 @@ class Camp implements Comparable {
         return "${location} ${city?:''} ${country?country.key:''}"
     }
     
+    /**
+     * Special comparison (may be a risk for sort or some sets...)
+     * Order doesn't matter if both camps are not StartOfCC
+     * Equality if both are StartOfCC
+     * Order if one is StartOfCC
+     */
     int compareTo(obj) {
         if (location!="StartOfCC" && obj.location!="StartOfCC") {
             return 0

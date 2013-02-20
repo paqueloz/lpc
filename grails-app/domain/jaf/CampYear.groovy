@@ -45,6 +45,11 @@ class CampYear implements Comparable {
         return "$camp ($year)"
     }
     
+    /**
+     * Comparison based on camp and year
+     * May return 0 if year is the same
+     * Could be dangerous when CampYear is in a sorted set on many side of a hasMany relationship
+     */
     int compareTo(obj) {
         // some camps come after others
         int comparison = camp.compareTo(obj.camp)

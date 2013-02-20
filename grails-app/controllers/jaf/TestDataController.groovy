@@ -159,6 +159,24 @@ class TestDataController {
                 camp        : k,
                 comment     : "plombier",
                 startDate   : new SimpleDateFormat("yyyy-MM-dd").parse("2000-08-04")).save(failOnError:true)
-
+        new Person(  firstName   : "Dj",
+            lastName    : "Bobo",
+            birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1998-09-08"), // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            gender      : Gender.MALE,
+            status      : PersonStatus.UNdefined,
+            ).save(failOnError:true)
+        new Person(  firstName   : "Dijé",
+            lastName    : "Bobo",
+            birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1998-09-08"), // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            gender      : Gender.MALE,
+            status      : PersonStatus.UNdefined,
+            ).save(failOnError:true)
+        new Person(  firstName   : "Dj",
+            lastName    : "Bobo",
+            birthDay    : new SimpleDateFormat("yyyy-MM-dd").parse("1997-08-09"), // "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            gender      : Gender.MALE,
+            status      : PersonStatus.UNdefined,
+            ).save(failOnError:true)
+    
     }
 }

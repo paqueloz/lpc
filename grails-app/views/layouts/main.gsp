@@ -48,7 +48,11 @@
         </div>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo">
+        <div class="wholewidth">
         <langs:selector langs="en, fr"/>
+        <div class="rightcolumn">
+        v.&nbsp;<g:meta name="app.version"/>
+        </div>
         </div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 		<g:javascript library="application"/>

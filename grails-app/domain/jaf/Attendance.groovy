@@ -55,7 +55,11 @@ class Attendance implements Comparable {
         if (cmpStat != 0) {
             return cmpStat
         }
-        person.lastName.compareTo(obj.person.lastName)
+        return person.lastName.compareTo(obj.person.lastName) ?:
+            ( person.firstName.compareTo(obj.person.firstName) ?:
+                (person.birthDay <=> obj.person.birthDay)
+            )
+        
     }
     
     int compareStatus(obj) {
