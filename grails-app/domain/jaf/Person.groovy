@@ -47,7 +47,9 @@ class Person {
     
     String parentName
     
-    SortedSet attendances
+    SortedSet attendances       // Attendance.compareTo must always be != 0
+                                // otherwise an attendance will not appear
+                                // in the list
 
     static hasMany = [contacts: PersonContact, attendances: Attendance,
         languages: LanguageLevel, address: Address,

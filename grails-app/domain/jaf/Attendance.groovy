@@ -45,6 +45,12 @@ class Attendance implements Comparable {
         return "${camp} - ${status}"
     }
     
+    /**
+     * Used to sort the list of attendance in the Person and in the CampYear view.
+     * Should not return 0 otherwise there will be missing entries in the views.
+     * - for the same camp and the same status the persons will be different
+     * - for the same person the camps will be different
+     */
     int compareTo(obj) {
         
         int compareYear = camp.compareTo(obj.camp)
@@ -55,11 +61,17 @@ class Attendance implements Comparable {
         if (cmpStat != 0) {
             return cmpStat
         }
-        return person.lastName.compareTo(obj.person.lastName) ?:
+        int cmpPerson = person.lastName.compareTo(obj.person.lastName) ?:
             ( person.firstName.compareTo(obj.person.firstName) ?:
                 (person.birthDay <=> obj.person.birthDay)
             )
-        
+        if (cmpPerson != 0) {
+            return cmpPerson
+        }
+        // The same person has attended two camps at the same level during the same year
+        // Or it has been registered twice in the same camp by mistake
+        // Return 1 to make it visible in the view
+        return 1
     }
     
     int compareStatus(obj) {

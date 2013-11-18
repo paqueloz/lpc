@@ -141,14 +141,16 @@
                 <li class="controller"><g:link controller="search"><g:message code="general.search" default="Search" /></g:link></li>
                 <li class="controller"><g:link controller="report" action="index"><g:message code="general.reports" default="Create reports" /></g:link></li>
               </ul>
-              <h2>Actions (admin):</h2>
-              <ul>
-                <li class="controller"><g:link controller="testData">Generate test data</g:link></li>
-                <li class="controller"><g:link controller="secUser">Manage users</g:link></li>
-                <%--
-                TODO hide for regular users
-                --%>
-              </ul>
+              
+              <sec:ifAnyGranted roles="ROLE_ADMIN">
+                  <h2>Actions (admin):</h2>
+                  <ul>
+                    <g:if env="development">
+                        <li class="controller"><g:link controller="testData">Generate test data</g:link></li>
+                    </g:if>
+                    <li class="controller"><g:link controller="secUser">Manage users</g:link></li>
+                  </ul>
+               </sec:ifAnyGranted>
             </div>
 		</div>
 	</body>

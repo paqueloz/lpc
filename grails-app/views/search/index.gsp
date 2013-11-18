@@ -25,7 +25,9 @@
 <%--    <h1><a href="http://grails.org/Searchable+Plugin" target="_blank">Grails <span>Searchable</span> Plugin</a></h1>--%>
     <h1><g:message code="search.type.your.query" default="Type your search query in the box below"/></h1>
     <g:form url='[controller: "search", action: "index"]' id="searchableForm" name="searchableForm" method="get">
-        <g:textField name="q" value="${params.q}" size="50"/> <input type="submit" value="<g:message code="general.search" default="Search"/>" />
+        <g:textField name="q" value="${params.q}" size="50"/>
+        <input type="submit" value="<g:message code="general.search" default="Search"/>" />
+        max: <g:field type="number" name="max" min="10" max="100" required="" size="3" value="${searchResult?.max ?: 30}"/> 
     </g:form>
     <div style="clear: both; display: none;" class="hint">See <a href="http://lucene.apache.org/java/docs/queryparsersyntax.html">Lucene query syntax</a> for advanced queries</div>
   </div>
@@ -95,7 +97,9 @@
             <g:set var="desc" value="${result.toString()}" />
             <g:if test="${desc.size() > 120}"><g:set var="desc" value="${desc[0..120] + '...'}" /></g:if>
             <div class="desc">${desc.encodeAsHTML()}</div>
+            <%--
             <div class="displayLink">${link}</div>
+             --%>
           </div>
         </g:each>
       </div>
@@ -103,6 +107,7 @@
       <div>
         <div class="paging">
           <g:if test="${haveResults}">
+              <br>
               Page:
               <g:set var="totalPages" value="${Math.ceil(searchResult.total / searchResult.max)}" />
               <g:if test="${totalPages == 1}"><span class="currentStep">1</span></g:if>
@@ -111,8 +116,10 @@
         </div>
       </div>
     </g:if>
-    <br>
-  <g:link action="refresh">Refresh index...</g:link>
+
+    <sec:ifAnyGranted roles="ROLE_ADMIN">
+        <div id="refreshIndex"> <g:link action="refresh">Refresh index...</g:link> </div>
+    </sec:ifAnyGranted>
   
   </div>
   </body>

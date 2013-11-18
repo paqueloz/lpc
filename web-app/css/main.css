@@ -635,3 +635,25 @@ a.skip {
     right: 0px;
     top: 0px;
 }
+
+.title, .results, .paging, #header, #refreshIndex {
+    margin: 1em;
+}
+ .paging .currentStep, .step, .nextLink, .prevLink {
+    margin: .4em;
+}
+.results .displayLink {
+    visibility: hidden;   
+}
+.name {
+    float: left;
+    width: 8em;
+    padding: .1em;
+}
+.desc {
+    float: left;
+    padding: .1em;
+}
+.paging, .result {
+    clear: left;
+}
