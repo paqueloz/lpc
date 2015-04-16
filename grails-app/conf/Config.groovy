@@ -119,16 +119,16 @@ log4j = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'jaf.SecUser'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'jaf.SecUserSecRole'
-grails.plugins.springsecurity.authority.className = 'jaf.SecRole'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'jaf.SecUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'jaf.SecUserSecRole'
+grails.plugin.springsecurity.authority.className = 'jaf.SecRole'
 
 
 
-import grails.plugins.springsecurity.SecurityConfigType
+import grails.plugin.springsecurity.SecurityConfigType
 
-grails.plugins.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
-grails.plugins.springsecurity.interceptUrlMap = [
+grails.plugin.springsecurity.securityConfigType = SecurityConfigType.InterceptUrlMap
+grails.plugin.springsecurity.interceptUrlMap = [
         '/login/**'         : ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/secUser/**'       : ['ROLE_ADMIN'],
         '/testData/**'      : ['ROLE_ADMIN'],

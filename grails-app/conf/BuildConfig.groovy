@@ -1,4 +1,4 @@
-grails.servlet.version = "2.5" /*
+/*
  * This program is intended to help the Luethi-Peterson Camps association
  *     to help them store and manage their users
  *
@@ -16,13 +16,21 @@ grails.servlet.version = "2.5" /*
  *
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */ // Change depending on target container compliance (2.5 or 3.0)
+ */ 
+// Change depending on target container compliance (2.5 or 3.0)
+grails.servlet.version = "2.5" 
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+
+// since 2.3
+grails.project.dependency.resolver = "ivy" // ivy or maven
+
+// turn off dependency resolution
+grails.offline.mode = true
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -55,8 +63,9 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:$grailsVersion"
-        runtime ":jquery:1.7.1"
+        runtime ":hibernate:3.6.10.16"
+		// jquery upgrade to 1.11.1 after installing easygrid
+        runtime ":jquery:1.11.1"
         runtime ":resources:1.1.6"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
@@ -64,7 +73,18 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        build ":tomcat:$grailsVersion"
+		// plugins for the build system only
+		build ":tomcat:7.0.54"
+		
+		compile ":spring-security-core:2.0-RC4"
+		compile ":countries:0.4"
+		// export upgrade to 1.6 after installing easygrid
+		compile ":export:1.6"
+		compile ":lang-selector:0.3"
+		compile ":searchable:0.6.9"
+		compile ":yui:2.8.2.1"
+		compile ":easygrid:1.7.1"
+		
     }
 }
 
